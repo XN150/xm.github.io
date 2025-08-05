@@ -1,0 +1,1843 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>致未来的你。</title>
+    <style>
+        *{
+            margin:0px;
+            padding:0px;
+        }
+        .header{
+            width:auto;
+            height:50px;
+            background-color: #333333;
+        }
+        .header .header-font-first{
+            margin-left:170px;
+            margin-top: 19px;
+            padding-left: 10px;
+            padding-right: 10px;
+            border-right: 2px solid #3f3f37;
+            color:#8e908d;
+            float: left;
+            font-size: 14px;
+        }
+        .header .header-font{
+            margin-top: 19px;
+            padding-left: 10px;
+            padding-right: 10px;
+            color:#8e908d;
+            border-right: 2px solid #3f3f37;
+            font-size: 14px;
+            float: left;
+        }
+        .header-font-last{
+            border:none;
+            margin-top: 19px;
+            padding-left: 10px;
+            padding-right: 10px;
+            color:#8e908d;
+            font-size: 14px;
+            float: left;
+        }
+        .header-font-first:hover {
+            color:#b2aead;
+            cursor:pointer;
+        }
+        .header-font:hover {
+            color:#b2aead;
+            cursor:pointer;
+        }
+        .header-font-last:hover {
+            color:#b2aead;
+            cursor:pointer;
+        }
+        .header-font-first2{
+            padding-left: 178px;
+            float: left;
+            margin-top: 19px;
+            font-size: 14px;
+            color:#8e908d;
+        }
+        .header-font-first2{
+            cursor:pointer;
+            color:#b2aead;
+        }
+        .header2{
+            height: 125px;
+            width:auto;
+            /* background-color:#e24b4b; */
+            /* position:relative; */
+        }
+        .header2 .header2-logo{
+            width: 56px;
+            height:56px;
+            background-image: url(./img/logo-1.jpg);
+            background-size: contain;
+            margin-top: 28px;
+            margin-left: 182px;
+            float: left;
+        }
+        .header2 .header2-font{
+            font-size: 20px;
+            float: left;
+            margin-left: 210px;
+            margin-top: 50px;
+            padding-left: 10px;
+
+        }
+        .header2 .header2-font:hover{
+            color:#ff6705;
+        }
+        .header2  .header2-font-list{
+            width:auto;
+            height:287px;
+            border-top: 1px solid #dfdfdf;
+            background-color: aqua;
+            position: absolute;
+            top:125px;
+        }
+        .header3{
+            width:1226px;
+            height: 460px;
+            /* border:1px solid #8a501e; */
+            margin-left:179px;
+        }
+        .header3 .header3-list{
+            width: 233px;
+            height:438px;
+            /* position:relative; */
+            background-color: #3f3d3d;
+            opacity:0.5;
+            padding-top: 20px;
+        }
+        .header3 .header3-list .header3-list-spuare{
+            width:230px;
+            height:42px;
+            color:#dd0606;
+            display: block;
+            z-index: 2;
+        }
+        .header3 .header3-list .header3-list-spuare:hover{
+            background-color: #ff6705;
+        }
+        .header3 .header3-photo{
+            width: 991px;
+            height: 458px;
+            position:absolute;
+            left:412px;
+            top: 175px;
+            background-image: url(./img/xiaomi11.jpg);
+        }
+        .bigheader4{
+            height: 168px;
+            width:1226px;
+            position: relative;
+        }
+         .header4{
+            width: 228px;
+            height: 168px;
+            padding-top: 2px;
+            padding-left: 3px;
+            margin-left: 179px;
+            margin-top: 14px;
+            background-color: #5f5750;
+            opacity:0.7;
+            cursor:pointer;
+            /* float: left; */
+        }
+         .header4 .header4-box{
+            width:73px;
+            height: 80px;
+            border:1px solid #665e57;
+            float: left;
+        }
+         .header4 .header4-box .header4-box-photo{
+            width: 24px;
+            display: inline-block;
+            padding-left: 23px;
+            padding-right: 23px;
+            padding-top: 19px;
+            padding-bottom: 5px;         
+        }
+         .header4 .header4-box .header4-box-font{
+            font-size: 13px;
+            text-align: center;
+            color:#c3c0bd;
+        }
+        .header4 .header4-box:hover .header4-box-photo{
+            filter:drop-shadow(0 0 0 #ffffff);
+        }
+        .header4 .header4-box:hover .header4-box-font{
+            color:#ffffff;
+        }
+         .header4-advert1{
+            width: 316px;
+            height: 170px;
+            background-image: url(./img/box7.png);
+            margin-left: 14px;
+            margin-top: 14px;
+            position:absolute;
+            top:635px;
+            left:410px;
+            z-index:1;
+            cursor:pointer;
+        }
+        .header4-advert2{
+            width: 316px;
+            height: 170px;
+            background-image: url(./img/box8.jpg);
+            background-size: contain;
+            margin-left: 14px;
+            margin-top: 14px;
+            position:absolute;
+            top:635px;
+            left:742px;
+            cursor:pointer;
+            
+        }
+        .header4-advert3{
+            width: 316px;
+            height: 170px;
+            background-image: url(./img/box9.jpeg);
+            background-size: contain;
+            margin-left: 14px;
+            margin-top: 14px;
+            position:absolute;
+            top:635px;
+            left:1073px;
+            cursor:pointer;
+        }
+        .header5{
+            height: 92px;
+            width:auto;
+            background-color: #f5f5f5;
+            padding-left: 179px;
+            padding-top: 26px;
+            padding-bottom: 22px;
+        }
+        .header5 .header5-photo{
+            height:120px;
+            width: 1226px;
+            background-image: url(./img/box10.png);
+            background-size:cover;
+        }
+        .header5:hover{
+            cursor:pointer;
+        }
+        .box1{
+            height: 58px;
+            width:auto;
+            background: #f5f5f5;
+            padding-left: 179px;
+            position:relative;
+        }
+        .box1 .box1-font1{
+            font-size: 22px;
+            display: inline-block;
+            padding-top: 18px;
+        }
+        .box1 .box1-font2{
+            position: absolute;
+            right:179px;
+            bottom:20px;
+            padding-top: 25px;
+        }
+        .box1 .box1-font2:hover{
+            color:#ff6705 ;
+            cursor:pointer;
+        }
+        .box2{
+            height: 614px;
+            width: auto;
+            padding-left: 179px;
+            background-color:#f5f5f5 ;
+        }
+        .box2 .box2-photo{
+            background-image: url(./img/box11.png);
+            width: 234px;
+            height: 614px;
+            float:left;
+        }
+        .box2 .box2-list{
+            width: 992px;
+            height: 614px;
+            float: left;
+        }
+        .box2 .box2-list .box2-list-phone{
+            width: 200px;
+            height: 260px;
+            padding-top: 20px;
+            padding-bottom: 20px;
+            padding-left: 34px;
+            margin-left: 14px;
+            margin-bottom: 14px;
+            background-color: white;
+            float: left;
+        }
+        .box2 .box2-list .box2-list-phone .box2-list-phone-photo1{
+            background-image: url(./img/box12.png);
+            width: 160px;
+            height:160px;
+            background-size: contain;
+        }
+        .box2 .box2-list .box2-list-phone .box2-list-phone-photo-font1{
+            font-size: 13px;
+            padding-left: 15px;
+            padding-top: 18px;
+            padding-bottom: 3px;
+        }
+        .box2 .box2-list .box2-list-phone .box2-list-phone-photo-font2{
+            font-size: 11px;
+            padding-left: 22px;
+            color:#b0b0b0;
+        }
+        .box2 .box2-list .box2-list-phone .box2-list-phone-photo-font3{
+            font-size: 14px;
+            color:#ff6700;
+            padding-left: 50px;
+            padding-top: 15px;
+        }
+        .box2 .box2-list .box2-list-phone .box2-list-phone-photo2{
+            background-image: url(./img/box13.png);
+            width: 160px;
+            height:160px;
+            background-size: contain;
+        }
+        .box2 .box2-list .box2-list-phone .box2-list-phone-photo3{
+            background-image: url(./img/box14.png);
+            width: 160px;
+            height:160px;
+            background-size: contain;
+        }
+        .box2 .box2-list .box2-list-phone .box2-list-phone-photo4{
+            background-image: url(./img/box15.png);
+            width: 160px;
+            height:160px;
+            background-size: contain;
+        }
+        .box2 .box2-list .box2-list-phone .box2-list-phone-photo5{
+            background-image: url(./img/box16.png);
+            width: 160px;
+            height:160px;
+            background-size: contain;
+        }
+        .box2 .box2-list .box2-list-phone .box2-list-phone-photo6{
+            background-image: url(./img/box17.png);
+            width: 160px;
+            height:160px;
+            background-size: contain;
+        }
+        .box2 .box2-list .box2-list-phone .box2-list-phone-photo7{
+            background-image: url(./img/box18.png);
+            width: 160px;
+            height:160px;
+            background-size: contain;
+        }
+        .box2 .box2-list .box2-list-phone .box2-list-phone-photo8{
+            background-image: url(./img/box19.png);
+            width: 160px;
+            height:160px;
+            background-size: contain;
+        }
+        .box2 .box2-list .box2-list-phone .box2-list-phone-photo-font4{
+            font-size: 13px;
+            padding-left: 45px;
+            padding-top: 18px;
+            padding-bottom: 3px;
+        }
+        .box2 .box2-list .box2-list-phone .box2-list-phone-photo-font5{
+            font-size: 11px;
+            padding-left: 38px;
+            color:#b0b0b0;
+        }
+        .box2 .box2-list .box2-list-phone .box2-list-phone-photo-font6{
+            font-size: 13px;
+            padding-left: 60px;
+            padding-top: 18px;
+            padding-bottom: 3px;
+        }
+        .box2 .box2-list .box2-list-phone .box2-list-phone-photo-font7{
+            font-size: 13px;
+            padding-left: 45px;
+            padding-top: 18px;
+            padding-bottom: 3px;
+        }
+        .box2 .box2-list .box2-list-phone .box2-list-phone-photo-font8{
+            font-size: 11px;
+            padding-left: 30px;
+            color:#b0b0b0;
+        }
+        .box2 .box2-list .box2-list-phone .box2-list-phone-photo-font9{
+            font-size: 13px;
+            padding-left: 35px;
+            padding-top: 18px;
+            padding-bottom: 3px;
+        }
+        .box2 .box2-list .box2-list-phone .box2-list-phone-photo-font10{
+            font-size: 11px;
+            padding-left: 45px;
+            color:#b0b0b0;
+        }
+        .box3{
+            height:80px;
+            width: auto;
+            background-color: #f5f5f5;
+            padding-left: 179px;
+            position: relative;
+        }
+        .box3 .box3-font1{
+            font-size: 22px;
+            display: inline-block;
+            padding-top: 40px;
+        }
+        .box3 .box3-font2{
+            position: absolute;
+            right:250px;
+            bottom:20px;
+            padding-top: 25px;
+        }
+        .box3 .box3-font3{
+            position: absolute;
+            right:185px;
+            bottom:20px;
+            padding-top: 25px;
+        }
+        .box3 .box3-font2:hover{
+            color:#ff6705 ;
+            cursor:pointer;
+        }
+        .box3 .box3-font3:hover{
+            color:#ff6705 ;
+            cursor:pointer;
+        }
+        .box4{
+            height: 614px;
+            width:auto;
+            background-color: #f5f5f5;
+            padding-left: 179px;
+        }
+        .box4 .box4-photo{
+            background-image: url(./img/box20.png);
+            width: 234px;
+            height: 614px;
+            float:left;
+        }
+        .box4 .box4-photo:hover{
+            cursor:pointer;
+        }
+        .box4 .box4-list{
+            width: 992px;
+            height: 614px;
+            float: left;
+            /* display: none; */
+        }
+        .box4 .box4-list .box4-list-watch{
+            width: 234px;
+            height:260px;
+            padding-top: 20px;
+            padding-bottom: 20px;
+            background-color: #ffffff;
+            float: left;
+            margin-left: 14px;
+            margin-bottom: 10px;
+        }
+        .box4 .box4-list .box4-list-watch .box4-list-watch-photo{
+            background-image: url(./img/box21.png);
+            width: 160px;
+            height: 160px;
+            background-size:contain;
+            position: relative;
+            left: 37px;
+            
+        }
+        .box4 .box4-list .box4-list-watch .box4-list-watch-photo-font1{
+            font-size: 13px;
+            text-align: center;
+            padding-top: 18px;
+            padding-bottom: 3px;
+        }
+        .box4 .box4-list .box4-list-watch .box4-list-watch-photo-font2{
+            font-size: 11px;
+            text-align: center;
+            color:#b0b0b0;
+        }
+        .box4 .box4-list .box4-list-watch .box4-list-watch-photo-font3{
+            font-size: 14px;
+            color:#ff6700;
+            text-align: center;
+            padding-top: 15px;
+        }
+        .box4 .box4-list .box4-list-watch{
+            cursor:pointer;
+        }
+        .box4 .box4-list .box4-list-watch .box4-list-watch-photo2{
+            background-image: url(./img/box22.png);
+            width: 160px;
+            height: 160px;
+            background-size:contain;
+            position: relative;
+            left: 37px;    
+        }
+        .box4 .box4-list .box4-list-watch .box4-list-watch-photo3{
+            background-image: url(./img/box23.png);
+            width: 160px;
+            height: 160px;
+            background-size:contain;
+            position: relative;
+            left: 37px;
+            
+        }
+        .box4 .box4-list .box4-list-watch .box4-list-watch-photo4{
+            background-image: url(./img/box24.png);
+            width: 160px;
+            height: 160px;
+            background-size:contain;
+            position: relative;
+            left: 37px;
+            
+        }
+        .box4 .box4-list .box4-list-watch .box4-list-watch-photo5{
+            background-image: url(./img/box25.png);
+            width: 160px;
+            height: 160px;
+            background-size:contain;
+            position: relative;
+            left: 37px;
+            
+        }
+        .box4 .box4-list .box4-list-watch .box4-list-watch-photo6{
+            background-image: url(./img/box26.png);
+            width: 160px;
+            height: 160px;
+            background-size:contain;
+            position: relative;
+            left: 37px;
+            
+        }
+        .box4 .box4-list .box4-list-watch .box4-list-watch-photo7{
+            background-image: url(./img/box27.png);
+            width: 160px;
+            height: 160px;
+            background-size:contain;
+            position: relative;
+            left: 37px;
+            
+        }
+        .box4 .box4-list .box4-list-watch-last{
+            width: 205px;
+            height:70px;
+            padding-top: 54px;
+            padding-bottom: 20px;
+            padding-left: 29px;
+            background-color: #ffffff;
+            float: left;
+            margin-left: 14px;
+            margin-bottom: 10px;
+        }
+        .box4 .box4-list .box4-list-watch-last  .box4-list-watch-last-font{
+            float: left;
+        }
+        .box4 .box4-list .box4-list-watch-last  .box4-list-watch-last-font .box4-list-watch-last-font1{
+            font-size: 18px;
+        }
+        .box4 .box4-list .box4-list-watch-last  .box4-list-watch-last-font .box4-list-watch-last-font2{
+            font-size: 11px;
+            color:#757575;
+        }
+        .box5{
+            height:80px;
+            width: auto;
+            background-color: #f5f5f5;
+            padding-left: 179px;
+            position: relative;
+        }
+        .box5 .box5-font1{
+            font-size: 22px;
+            display: inline-block;
+            padding-top: 40px;
+        }
+        .box5 .box5-font2{
+            position: absolute;
+            right:270px;
+            bottom:20px;
+            padding-top: 25px;
+        }
+        .box5 .box5-font3{
+            position: absolute;
+            right:185px;
+            bottom:20px;
+            padding-top: 25px;
+        }
+        .box5 .box5-font2:hover{
+            color:#ff6705 ;
+            cursor:pointer;
+        }
+        .box5 .box5-font3:hover{
+            color:#ff6705 ;
+            cursor:pointer;
+        }
+        .box6{
+            height: 614px;
+            width:auto;
+            background-color: #f5f5f5;
+            padding-left: 179px;
+        }
+        .box6 .box6-photo{
+            width: 234px;
+            height: 614px;
+            float:left;
+        }
+        .box6 .box6-photo .box6-photo2{
+            width: 234px;
+            height: 300px;
+            background-image: url(./img/box28.png);
+            background-size: contain;
+            margin-bottom: 16px;
+        }
+        .box6 .box6-photo .box6-photo3{
+            width: 234px;
+            height: 300px;
+            background-image: url(./img/box29.png);
+            background-size: contain;
+        }
+        .box6 .box6-photo .box6-photo2:hover{
+            cursor:pointer;
+        }
+        .box6 .box6-photo .box6-photo3:hover{
+            cursor:pointer;
+        }
+        .box6 .box6-list{
+            width: 992px;
+            height: 614px;
+            float: left;
+        }
+        .box6 .box6-list .box6-list-tv{
+            width: 234px;
+            height:260px;
+            padding-top: 20px;
+            padding-bottom: 20px;
+            background-color: #ffffff;
+            float: left;
+            margin-left: 14px;
+            margin-bottom: 10px;
+        }
+        .box6 .box6-list .box6-list-tv:hover{
+            cursor:pointer;
+        }
+        .box6 .box6-list .box6-list-tv .box6-list-tv-photo{
+            background-image: url(./img/box30.png);
+            width: 160px;
+            height: 160px;
+            background-size:contain;
+            position: relative;
+            left: 37px;
+        }
+        .box6 .box6-list .box6-list-tv .box6-list-tv-photo2{
+            background-image: url(./img/box31.png);
+            width: 160px;
+            height: 160px;
+            background-size:contain;
+            position: relative;
+            left: 37px;
+        }
+        .box6 .box6-list .box6-list-tv .box6-list-tv-photo3{
+            background-image: url(./img/box32.png);
+            width: 160px;
+            height: 160px;
+            background-size:contain;
+            position: relative;
+            left: 37px;
+        }
+        .box6 .box6-list .box6-list-tv .box6-list-tv-photo4{
+            background-image: url(./img/box33.png);
+            width: 160px;
+            height: 160px;
+            background-size:contain;
+            position: relative;
+            left: 37px;
+        }.box6 .box6-list .box6-list-tv .box6-list-tv-photo5{
+            background-image: url(./img/box34.png);
+            width: 160px;
+            height: 160px;
+            background-size:contain;
+            position: relative;
+            left: 37px;
+        }
+        .box6 .box6-list .box6-list-tv .box6-list-tv-photo6{
+            background-image: url(./img/box35.png);
+            width: 160px;
+            height: 160px;
+            background-size:contain;
+            position: relative;
+            left: 37px;
+        }
+        .box6 .box6-list .box6-list-tv .box6-list-tv-photo7{
+            background-image: url(./img/box36.png);
+            width: 160px;
+            height: 160px;
+            background-size:contain;
+            position: relative;
+            left: 37px;
+        }
+        .box6 .box6-list .box6-list-tv .box6-list-tv-photo-font1{
+            font-size: 13px;
+            text-align: center;
+            padding-top: 18px;
+            padding-bottom: 3px;
+        }
+        .box6 .box6-list .box6-list-tv .box6-list-tv-photo-font2{
+            font-size: 11px;
+            text-align: center;
+            color:#b0b0b0;
+        }
+        .box6 .box6-list .box6-list-tv .box6-list-tv-photo-font3{
+            font-size: 14px;
+            color:#ff6700;
+            text-align: center;
+            padding-top: 15px;
+        }
+        .box7{
+            height:80px;
+            width: auto;
+            background-color: #f5f5f5;
+            padding-left: 179px;
+            position: relative;
+        }
+        .box7 .box7-font1{
+            font-size: 22px;
+            display: inline-block;
+            padding-top: 40px;
+        }
+        .box7 .box7-font2{
+            position: absolute;
+            right:300px;
+            bottom:20px;
+            padding-top: 25px;
+        }
+        .box7 .box7-font3{
+            position: absolute;
+            right:250px;
+            bottom:20px;
+            padding-top: 25px;
+        }
+        .box7 .box7-font4{
+            position: absolute;
+            right:200px;
+            bottom:20px;
+            padding-top: 25px;
+        }
+        .box7 .box7-font5{
+            position: absolute;
+            right:150px;
+            bottom:20px;
+            padding-top: 25px;
+        }
+        .box7 .box7-font2:hover{
+            color:#ff6705 ;
+            cursor:pointer;
+        }
+        .box7 .box7-font3:hover{
+            color:#ff6705 ;
+            cursor:pointer;
+        }
+        .box7 .box7-font4:hover{
+            color:#ff6705 ;
+            cursor:pointer;
+        }
+        .box7 .box7-font4:hover{
+            color:#ff6705 ;
+            cursor:pointer;
+        }
+        .box7 .box10-font5:hover{
+            color:#ff6705 ;
+            cursor:pointer;
+        }
+        .box8{
+            height: 614px;
+            width:auto;
+            background-color: #f5f5f5;
+            padding-left: 179px;
+        }
+        .box8 .box8-photo{
+            width: 234px;
+            height: 614px;
+            float:left;
+        }
+        .box8 .box8-photo .box8-photo2{
+            width: 234px;
+            height: 300px;
+            background-image: url(./img/box38.png);
+            background-size: contain;
+            margin-bottom: 16px;
+        }
+        .box8 .box8-photo .box8-photo3{
+            width: 234px;
+            height: 300px;
+            background-image: url(./img/box39.png);
+            background-size: contain;
+        }
+        .box8 .box8-photo .box8-photo2:hover{
+            cursor:pointer;
+        }
+        .box8 .box8-photo .box8-photo3:hover{
+            cursor:pointer;
+        }
+        .box8 .box8-list{
+            width: 992px;
+            height: 614px;
+            float: left;
+        }
+        .box8 .box8-list .box8-list-tv{
+            width: 234px;
+            height:260px;
+            padding-top: 20px;
+            padding-bottom: 20px;
+            background-color: #ffffff;
+            float: left;
+            margin-left: 14px;
+            margin-bottom: 10px;
+        }
+        .box8 .box8-list .box8-list-tv:hover{
+            cursor:pointer;
+        }
+        .box8 .box8-list .box8-list-tv .box8-list-tv-photo{
+            background-image: url(./img/box40.png);
+            width: 160px;
+            height: 160px;
+            background-size:contain;
+            position: relative;
+            left: 37px;
+        }
+        .box8 .box8-list .box8-list-tv .box8-list-tv-photo2{
+            background-image: url(./img/box41.png);
+            width: 160px;
+            height: 160px;
+            background-size:contain;
+            position: relative;
+            left: 37px;
+        }
+        .box8 .box8-list .box8-list-tv .box8-list-tv-photo3{
+            background-image: url(./img/box42.png);
+            width: 160px;
+            height: 160px;
+            background-size:contain;
+            position: relative;
+            left: 37px;
+        }
+        .box8 .box8-list .box8-list-tv .box8-list-tv-photo4{
+            background-image: url(./img/box43.png);
+            width: 160px;
+            height: 160px;
+            background-size:contain;
+            position: relative;
+            left: 37px;
+        }
+        .box8 .box8-list .box8-list-tv .box8-list-tv-photo5{
+            background-image: url(./img/box44.png);
+            width: 160px;
+            height: 160px;
+            background-size:contain;
+            position: relative;
+            left: 37px;
+        }
+        .box8 .box8-list .box8-list-tv .box8-list-tv-photo6{
+            background-image: url(./img/box45.png);
+            width: 160px;
+            height: 160px;
+            background-size:contain;
+            position: relative;
+            left: 37px;
+        }
+        .box8 .box8-list .box8-list-tv .box8-list-tv-photo7{
+            background-image: url(./img/box46.png);
+            width: 160px;
+            height: 160px;
+            background-size:contain;
+            position: relative;
+            left: 37px;
+        }
+        .box8 .box8-list .box8-list-tv .box8-list-tv-photo-font1{
+            font-size: 13px;
+            text-align: center;
+            padding-top: 18px;
+            padding-bottom: 3px;
+        }
+        .box8 .box8-list .box8-list-tv .box8-list-tv-photo-font2{
+            font-size: 11px;
+            text-align: center;
+            color:#b0b0b0;
+        }
+        .box8 .box8-list .box8-list-tv .box8-list-tv-photo-font3{
+            font-size: 14px;
+            color:#ff6700;
+            text-align: center;
+            padding-top: 15px;
+        }
+        .box9{
+            height: 92px;
+            width:auto;
+            background-color: #f5f5f5;
+            padding-left: 179px;
+            padding-top: 26px;
+            padding-bottom: 22px;
+        }
+        .box9 .box9-photo{
+            height:120px;
+            width: 1226px;
+            background-image: url(./img/box48.png);
+            background-size:cover;
+        }
+        .box9:hover{
+            cursor:pointer;
+        }
+        .box10{
+            height:80px;
+            width: auto;
+            background-color: #f5f5f5;
+            padding-left: 179px;
+            position: relative;
+        }
+        .box10 .box10-font1{
+            font-size: 22px;
+            display: inline-block;
+            padding-top: 40px;
+        }
+        .box10 .box10-font2{
+            position: absolute;
+            right:350px;
+            bottom:20px;
+            padding-top: 25px;
+        }
+        .box10 .box10-font3{
+            position: absolute;
+            right:300px;
+            bottom:20px;
+            padding-top: 25px;
+        }
+        .box10 .box10-font4{
+            position: absolute;
+            right:240px;
+            bottom:20px;
+            padding-top: 25px;
+        }
+        .box10 .box10-font5{
+            position: absolute;
+            right:180px;
+            bottom:20px;
+            padding-top: 25px;
+        }
+        .box10 .box10-font2:hover{
+            color:#ff6705 ;
+            cursor:pointer;
+        }
+        .box10 .box10-font3:hover{
+            color:#ff6705;
+            cursor:pointer;
+        }
+        .box10 .box10-font4:hover{
+            color:#ff6705 ;
+            cursor:pointer;
+        }
+        .box10 .box10-font5:hover{
+            color:#ff6705 ;
+            cursor:pointer;
+        }
+        .box11{
+            height: 614px;
+            width:auto;
+            background-color: #f5f5f5;
+            padding-left: 179px;
+        }
+        .box11 .box11-photo{
+            width: 234px;
+            height: 614px;
+            float:left;
+        }
+        .box11 .box11-photo .box11-photo2{
+            width: 234px;
+            height: 300px;
+            background-image: url(./img/box56.png);
+            background-size: contain;
+            margin-bottom: 16px;
+        }
+        .box11 .box11-photo .box11-photo3{
+            width: 234px;
+            height: 300px;
+            background-image: url(./img/box57.png);
+            background-size: contain;
+        }
+        .box11 .box11-photo .box11-photo2:hover{
+            cursor:pointer;
+        }
+        .box11 .box11-photo .box11-photo3:hover{
+            cursor:pointer;
+        }
+        .box11 .box11-list{
+            width: 992px;
+            height: 614px;
+            float: left;
+        }
+        .box11 .box11-list .box11-list-tv{
+            width: 234px;
+            height:260px;
+            padding-top: 20px;
+            padding-bottom: 20px;
+            background-color: #ffffff;
+            float: left;
+            margin-left: 14px;
+            margin-bottom: 10px;
+        }
+        .box11 .box11-list .box11-list-tv:hover{
+            cursor:pointer;
+        }
+        .box11 .box11-list .box11-list-tv .box11-list-tv-photo{
+            background-image: url(./img/box49.png);
+            width: 160px;
+            height: 160px;
+            background-size:contain;
+            position: relative;
+            left: 37px;
+        }
+        .box11 .box11-list .box11-list-tv .box11-list-tv-photo2{
+            background-image: url(./img/box50.png);
+            width: 160px;
+            height: 160px;
+            background-size:contain;
+            position: relative;
+            left: 37px;
+        }
+        .box11 .box11-list .box11-list-tv .box11-list-tv-photo3{
+            background-image: url(./img/box51.png);
+            width: 160px;
+            height: 160px;
+            background-size:contain;
+            position: relative;
+            left: 37px;
+        }
+        .box11 .box11-list .box11-list-tv .box11-list-tv-photo4{
+            background-image: url(./img/box52.png);
+            width: 160px;
+            height: 160px;
+            background-size:contain;
+            position: relative;
+            left: 37px;
+        }
+        .box11 .box11-list .box11-list-tv .box11-list-tv-photo5{
+            background-image: url(./img/box53.png);
+            width: 160px;
+            height: 160px;
+            background-size:contain;
+            position: relative;
+            left: 37px;
+        }
+        .box11 .box11-list .box11-list-tv .box11-list-tv-photo6{
+            background-image: url(./img/box54.png);
+            width: 160px;
+            height: 160px;
+            background-size:contain;
+            position: relative;
+            left: 37px;
+        }
+        .box11 .box11-list .box11-list-tv .box11-list-tv-photo7{
+            background-image: url(./img/box55.png);
+            width: 160px;
+            height: 160px;
+            background-size:contain;
+            position: relative;
+            left: 37px;
+        }
+        .box11 .box11-list .box11-list-tv .box11-list-tv-photo-font1{
+            font-size: 13px;
+            text-align: center;
+            padding-top: 18px;
+            padding-bottom: 3px;
+        }
+        .box11 .box11-list .box11-list-tv .box11-list-tv-photo-font2{
+            font-size: 11px;
+            text-align: center;
+            color:#b0b0b0;
+        }
+        .box11 .box11-list .box11-list-tv .box11-list-tv-photo-font3{
+            font-size: 14px;
+            color:#ff6700;
+            text-align: center;
+            padding-top: 15px;
+        }
+        .box12{
+            height:80px;
+            width: auto;
+            background-color: #f5f5f5;
+            padding-left: 179px;
+            position: relative;
+        }
+        .box12 .box12-font1{
+            font-size: 22px;
+            display: inline-block;
+            padding-top: 40px;
+        }
+        .box12 .box12-font2{
+            position: absolute;
+            right:380px;
+            bottom:20px;
+            padding-top: 25px;
+        }
+        .box12 .box12-font3{
+            position: absolute;
+            right:330px;
+            bottom:20px;
+            padding-top: 25px;
+        }
+        .box12 .box12-font4{
+            position: absolute;
+            right:265px;
+            bottom:20px;
+            padding-top: 25px;
+        }
+        .box12 .box12-font5{
+            position: absolute;
+            right:180px;
+            bottom:20px;
+            padding-top: 25px;
+        }
+        .box12 .box12-font2:hover{
+            color:#ff6705 ;
+            cursor:pointer;
+        }
+        .box12 .box12-font3:hover{
+            color:#ff6705;
+            cursor:pointer;
+        }
+        .box12 .box12-font4:hover{
+            color:#ff6705 ;
+            cursor:pointer;
+        }
+        .box12 .box12-font5:hover{
+            color:#ff6705 ;
+            cursor:pointer;
+        } .box13{
+            height: 614px;
+            width:auto;
+            background-color: #f5f5f5;
+            padding-left: 179px;
+            padding-bottom: 40px;
+        }
+        .box13 .box13-photo{
+            width: 234px;
+            height: 614px;
+            float:left;
+        }
+        .box13 .box13-photo .box13-photo2{
+            width: 234px;
+            height: 300px;
+            background-image: url(./img/box58.png);
+            background-size: contain;
+            margin-bottom: 16px;
+        }
+        .box13 .box13-photo .box13-photo3{
+            width: 234px;
+            height: 300px;
+            background-image: url(./img/box59.png);
+            background-size: contain;
+        }
+        .box13 .box13-photo .box13-photo2:hover{
+            cursor:pointer;
+        }
+        .box13 .box13-photo .box13-photo3:hover{
+            cursor:pointer;
+        }
+        .box13 .box13-list{
+            width: 992px;
+            height: 614px;
+            float: left;
+        }
+        .box13 .box13-list .box13-list-tv{
+            width: 234px;
+            height:260px;
+            padding-top: 20px;
+            padding-bottom: 20px;
+            background-color: #ffffff;
+            float: left;
+            margin-left: 14px;
+            margin-bottom: 10px;
+        }
+        .box13 .box13-list .box13-list-tv:hover{
+            cursor:pointer;
+        }
+        .box13 .box13-list .box13-list-tv .box13-list-tv-photo{
+            background-image: url(./img/box60.png);
+            width: 160px;
+            height: 160px;
+            background-size:contain;
+            position: relative;
+            left: 37px;
+        }
+        .box13 .box13-list .box13-list-tv .box13-list-tv-photo2{
+            background-image: url(./img/box61.png);
+            width: 160px;
+            height: 160px;
+            background-size:contain;
+            position: relative;
+            left: 37px;
+        }
+        .box13 .box13-list .box13-list-tv .box13-list-tv-photo3{
+            background-image: url(./img/box62.png);
+            width: 160px;
+            height: 160px;
+            background-size:contain;
+            position: relative;
+            left: 37px;
+        }
+        .box13 .box13-list .box13-list-tv .box13-list-tv-photo4{
+            background-image: url(./img/box63.png);
+            width: 160px;
+            height: 160px;
+            background-size:contain;
+            position: relative;
+            left: 37px;
+        }.box13 .box13-list .box13-list-tv .box13-list-tv-photo5{
+            background-image: url(./img/box64.png);
+            width: 160px;
+            height: 160px;
+            background-size:contain;
+            position: relative;
+            left: 37px;
+        }
+        .box13 .box13-list .box13-list-tv .box13-list-tv-photo6{
+            background-image: url(./img/box65.png);
+            width: 160px;
+            height: 160px;
+            background-size:contain;
+            position: relative;
+            left: 37px;
+        }
+        .box13 .box13-list .box13-list-tv .box13-list-tv-photo7{
+            background-image: url(./img/box66.png);
+            width: 160px;
+            height: 160px;
+            background-size:contain;
+            position: relative;
+            left: 37px;
+        }
+        .box13 .box13-list .box13-list-tv .box13-list-tv-photo-font1{
+            font-size: 13px;
+            text-align: center;
+            padding-top: 18px;
+            padding-bottom: 3px;
+        }
+        .box13 .box13-list .box13-list-tv .box13-list-tv-photo-font2{
+            font-size: 11px;
+            text-align: center;
+            color:#b0b0b0;
+        }
+        .box13 .box13-list .box13-list-tv .box13-list-tv-photo-font3{
+            font-size: 14px;
+            color:#ff6700;
+            text-align: center;
+            padding-top: 15px;
+        }
+        .foot1{
+            height: 308px;
+            padding-top: 27px;
+            width: 1226px;
+            padding-left: 179px;
+            padding-right: 96px;
+            background-color: #ffffff; 
+        }
+        .foot1 .foot1-box1{
+            height:52px;
+            width: 1226px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        .foot1 .foot1-box1 .foot1-box1-font{
+            width:187px;
+            height: 25px;
+            border-right:1px solid  #e0e0e0;
+            margin-bottom: 27px;
+            padding-left: 55px;
+            font-weight: 300;
+            float: left;
+        }
+        .foot1 .foot1-box1 .foot1-box1-font:hover{
+            color:#ff6705;
+            cursor:pointer;
+        }
+        .foot1 .foot1-box2{
+            height: 145px;
+            padding-top: 40px;
+            padding-bottom: 40px;
+            float: left;
+
+        }
+        .foot1 .foot1-box2 .foot1-box2-font{
+            width: 160px;
+            height: 168px;
+            float: left;
+        }
+        .foot1 .foot1-box2 .foot1-box2-font .foot1-box2-font2{
+            margin-bottom: 26px;
+            font-size: 13px;
+            font-weight: 300;
+        }
+        .foot1 .foot1-box2 .foot1-box2-font .foot1-box2-font3{
+            margin-top: 10px;
+            font-size: 11px;
+            font-weight: 300;
+        }
+        .foot1 .foot1-box2 .foot1-box2-font .foot1-box2-font3:hover{
+            color:#ff6705;
+            cursor:pointer;
+        }
+        .foot1 .foot1-box3{
+            width: 239px;
+            height: 112px;
+            margin-top: 40px;
+            border-left: 1px solid #e0e0e0;
+            background-image: url(./img/box67.png);
+            background-size: contain;
+            float: left;
+
+        }
+        .foot2{
+            width: 1226px;
+            height: 206px;
+            padding: 30px 96px 30px 179px;
+            background-color: #fafafa;
+        }
+        .foot2 .foot2-photo{
+            background-image: url(./img/logo-1.jpg);
+            width: 56px;
+            height: 56px;
+            margin-right: 20px;
+            margin-bottom: 200px;
+            background-size: contain;
+            float: left;
+        }
+        .foot2 .foot2-font {
+            width: 1200px;
+            height: 110px;
+        }
+        .foot2 .foot2-font .foot2-font2{
+            font-size: 12px;
+            font-weight: 300;
+        }
+        .foot2 .foot2-font .foot2-font2:hover{
+            color: #ff6705;
+        }
+        .foot2 .foot2-font .foot2-font3{
+            font-size: 11px;
+            font-weight: 300;
+            color: #b0b7ca;
+        }
+        .foot2 .foot2-font .foot2-photo2{
+            width: 420px;
+            height: 30px;
+            background-image: url(./img/box68.png);
+            background-size: contain;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="header-font-first" onclick="window.open('https://www.mi.com/index.html')">小米商城</div>
+        <div class="header-font" onclick="window.open('https://home.miui.com/')">MIUI</div>
+        <div class="header-font" onclick="window.open('https://iot.mi.com/')">loT</div>
+        <div class="header-font" onclick="window.open('https://i.mi.com/')">云服务</div>
+        <div class="header-font" onclick="window.open('https://airstar.com/home')">天星数科</div>
+        <div class="header-font" onclick="window.open('https://www.xiaomiyoupin.com/')">有品</div> 
+        <div class="header-font" onclick="window.open('https://xiaoai.mi.com/')">小爱开放平台</div>
+        <div class="header-font" onclick="window.open('https://qiye.mi.com/')">企业团购</div>
+        <div class="header-font" onclick="window.open('https://www.mi.com/aptitude/list?id=88')">资质证照</div>
+        <div class="header-font" onclick="window.open('https://www.mi.com/aptitude/list')">协议规则</div>
+        <div class="header-font" onclick="window.open('https://www.mi.com/appdownload')">下载app</div>
+        <div class="header-font" onclick="window.open('https://xiaomishare.mi.com/?from=micom#/')">智能生活</div>
+        <div class="header-font-last">seselect Location</div>
+        <div class="header-font-first2">登录</div>
+        <div class="header-font">注册</div>
+        <div class="header-font-last">消息通知</div>
+    </div>
+    <div class="header2"> 
+        <div class="header2-logo"></div>
+        <div class="header2-font">Xiaomi手机</div>
+        <div class="header2-font-list"></div>
+
+    </div>
+    <div class="header3">
+        <div class="header3-list">
+            <div class="header3-list-square"></div>
+        </div>
+        <div class="header3-photo"></div>
+
+    </div>
+    <div class="bigherder4">
+    <div class="header4">
+        <div class="header4-box" onclick="window.open('https://api.jr.mi.com/activity/scene/scenePCsearch.html?from=search')">
+                <img src="./img/box1.png"  class="header4-box-photo">
+                <div class="header4-box-font">保障服务</div>        
+        </div>
+        <div class="header4-box" onclick="window.open('https://qiye.mi.com/')">
+            <img src="./img/box2.png"  class="header4-box-photo">
+            <div class="header4-box-font">企业团购</div>        
+        </div>
+        <div class="header4-box" onclick="window.open('https://www.mi.com/order/fcode')">
+            <img src="./img/box3.png"  class="header4-box-photo">
+            <div class="header4-box-font">F码通道</div>        
+        </div>
+        <div class="header4-box" onclick="window.open('https://www.mi.com/mimobile')">
+            <img src="./img/box4.png"  class="header4-box-photo">
+            <div class="header4-box-font">米粉卡</div>        
+        </div>
+        <div class="header4-box" onclick="window.open('https://www.mi.com/a/h/16769.html')">
+            <img src="./img/box5.png"  class="header4-box-photo">
+            <div class="header4-box-font">以旧换新</div>        
+        </div>
+        <div class="header4-box" onclick="window.open('https://account.xiaomi.com/fe/service/login/password?_locale=zh_CN&sid=recharge&qs=%253Fcallback%253Dhttp%25253A%25252F%25252Frecharge.10046.mi.com%25252Fsts%25253Fsign%25253DbC%2525252Bk1yrraTJbriZ0UbiV7hfzHz4%2525253D%252526followup%25253Dhttp%2525253A%2525252F%2525252Frecharge.10046.mi.com%2525252F%2526sid%253Drecharge%2526_locale%253Dzh_CN&callback=http%3A%2F%2Frecharge.10046.mi.com%2Fsts%3Fsign%3DbC%252Bk1yrraTJbriZ0UbiV7hfzHz4%253D%26followup%3Dhttp%253A%252F%252Frecharge.10046.mi.com%252F&_sign=P%2BzbqaqaY2j9zuZTC7mrhVJnmJo%3D&serviceParam=%7B%22checkSafePhone%22%3Afalse%2C%22checkSafeAddress%22%3Afalse%2C%22lsrp_score%22%3A0.0%7D&showActiveX=false&theme=&needTheme=false&bizDeviceType=')">
+            <img src="./img/box6.png"  class="header4-box-photo">
+            <div class="header4-box-font">话费充值</div>        
+        </div>
+        </div>
+    <div class="header4-advert1" onclick="window.open('https://www.mi.com/mi11ultra')">
+    </div>
+    <div class="header4-advert2" onclick="window.open('https://www.mi.com/mixfold')">
+    </div>
+    <div class="header4-advert3" onclick="window.open('https://www.mi.com/buy/detail?product_id=14903')">
+    </div>
+    </div>
+    <div class="header5" onclick="window.open('https://www.mi.com/redmik40')">
+        <div class="header5-photo"></div>
+    </div>
+    <div class="box1">
+        <p class="box1-font1">手机</p>
+        <div class="box1-font2" onclick="window.open('https://www.mi.com/p/1915.html')">查看更多</div>
+    </div>
+    <div class="box2">
+        <div class="box2-photo" onclick="window.open('https://www.mi.com/mixfold')"></div>
+        <div class="box2-list">
+            <div class="box2-list-phone" onclick="window.open('https://www.mi.com/mi11le-5g-ne')">
+                <div class="box2-list-phone-photo1"></div>
+                <div class="box2-list-phone-photo-font1">Xiaomi 11 青春活力版</div>
+                <div class="box2-list-phone-photo-font2">轻薄5G，内外皆出彩</div>
+                <div class="box2-list-phone-photo-font3">1999元起</div>
+            </div>
+            <div class="box2-list-phone" onclick="window.open('https://www.mi.com/redminote11pro')">
+                <div class="box2-list-phone-photo2"></div>
+                <div class="box2-list-phone-photo-font1">Redmi note 11 Pro系列</div>
+                <div class="box2-list-phone-photo-font2">Redmi note 11 Pro系列</div>
+                <div class="box2-list-phone-photo-font3">1799元起</div>
+            </div>
+            <div class="box2-list-phone" onclick="window.open('https://www.mi.com/redminote11')">
+                <div class="box2-list-phone-photo3"></div>
+                <div class="box2-list-phone-photo-font1">Redmi note 11 5G</div>
+                <div class="box2-list-phone-photo-font2">5000mAh大量电池</div>
+                <div class="box2-list-phone-photo-font3">1199元起</div>
+            </div>
+            <div class="box2-list-phone" onclick="window.open('https://www.mi.com/redminote11-4g')">
+                <div class="box2-list-phone-photo4"></div>
+                <div class="box2-list-phone-photo-font1">Redmi note 11 4G</div>
+                <div class="box2-list-phone-photo-font2">5000mAh大量电池</div>
+                <div class="box2-list-phone-photo-font3">999元起</div>
+            </div>
+            <div class="box2-list-phone" onclick="window.open('https://www.mi.com/blackshark4spro')">
+                <div class="box2-list-phone-photo5"></div>
+                <div class="box2-list-phone-photo-font4">黑鲨4S PRO</div>
+                <div class="box2-list-phone-photo-font5">磁动力升降肩键</div>
+                <div class="box2-list-phone-photo-font3">4799元起</div>
+            </div>
+            <div class="box2-list-phone" onclick="window.open('https://www.mi.com/blackshark4s')">
+                <div class="box2-list-phone-photo6"></div>
+                <div class="box2-list-phone-photo-font6">黑鲨4S</div>
+                <div class="box2-list-phone-photo-font5">磁动力升降肩键</div>
+                <div class="box2-list-phone-photo-font3">2699元起</div>
+            </div>
+            <div class="box2-list-phone" onclick="window.open('https://www.mi.com/xiaomicivi')">
+                <div class="box2-list-phone-photo7"></div>
+                <div class="box2-list-phone-photo-font7">Xiaomi Civi</div>
+                <div class="box2-list-phone-photo-font8">3200万高清质感自拍</div>
+                <div class="box2-list-phone-photo-font3">2599元起</div>
+            </div>
+            <div class="box2-list-phone" onclick="window.open('https://www.mi.com/mix4')">
+                <div class="box2-list-phone-photo8"></div>
+                <div class="box2-list-phone-photo-font9">Xiaomi MIX 4</div>
+                <div class="box2-list-phone-photo-font10">CUP全面屏</div>
+                <div class="box2-list-phone-photo-font3">4199元起</div>
+            </div>
+            
+        </div>
+    </div>
+    <div class="box3">
+        <p class="box3-font1">智能穿戴</p>
+        <div class="box3-font2">热门</div>
+        <div class="box3-font3">穿戴</div>
+    </div>
+    <div class="box4">
+        <div class="box4-photo" onclick="window.open('https://www.mi.com/xiaomiwatchcolor2')"></div>
+        <div class="box4-list">
+            <div class="box4-list-watch" onclick="window.open('https://www.mi.com/redmiwatch2')">
+                <div class="box4-list-watch-photo"></div>
+                <div class="box4-list-watch-photo-font1">Redmi 手表 2</div>
+                <div class="box4-list-watch-photo-font2">AMOLED高清大屏</div>
+                <div class="box4-list-watch-photo-font3">399元起</div>
+            </div>
+            <div class="box4-list-watch" onclick="window.open('https://www.mi.com/shouhuan6/nfc')">
+                <div class="box4-list-watch-photo2"></div>
+                <div class="box4-list-watch-photo-font1">小米手环6 NFC版</div>
+                <div class="box4-list-watch-photo-font2">全屏实力</div>
+                <div class="box4-list-watch-photo-font3">269元起</div>
+            </div>
+            <div class="box4-list-watch" onclick="window.open('https://www.mi.com/redmi-watch-mulan')">
+                <div class="box4-list-watch-photo3"></div>
+                <div class="box4-list-watch-photo-font1">Redmi手表</div>
+                <div class="box4-list-watch-photo-font2">35g超清/1.4大屏/多功能NFC</div>
+                <div class="box4-list-watch-photo-font3">269元起</div>
+            </div>
+            <div class="box4-list-watch" onclick="window.open('https://www.mi.com/xiaomibuds3pro')">
+                <div class="box4-list-watch-photo4"></div>
+                <div class="box4-list-watch-photo-font1">Xiaomi 真无线降噪耳机 3 Pro</div>
+                <div class="box4-list-watch-photo-font2">动态降噪 静听曼妙</div>
+                <div class="box4-list-watch-photo-font3">689元起</div>
+            </div>
+            <div class="box4-list-watch" onclick="window.open('https://www.mi.com/buy/detail?product_id=14903')">
+                <div class="box4-list-watch-photo5"></div>
+                <div class="box4-list-watch-photo-font1">Redmi buds</div>
+                <div class="box4-list-watch-photo-font2">轻巧半入耳，舒适有天分</div>
+                <div class="box4-list-watch-photo-font3">189元起</div>
+            </div>
+            <div class="box4-list-watch" onclick="window.open('https://www.mi.com/buy/detail?product_id=15217')">
+                <div class="box4-list-watch-photo6"></div>
+                <div class="box4-list-watch-photo-font1">Redmi Buds 3 青春版</div>
+                <div class="box4-list-watch-photo-font2">轻巧无线，持久动听</div>
+                <div class="box4-list-watch-photo-font3">99元起</div>
+            </div>
+            <div class="box4-list-watch" onclick="window.open('https://www.mi.com/buy/detail?product_id=14243')">
+                <div class="box4-list-watch-photo7"></div>
+                <div class="box4-list-watch-photo-font1">Redmi AirDots 3 Pro</div>
+                <div class="box4-list-watch-photo-font2">智能降噪，超低延迟</div>
+                <div class="box4-list-watch-photo-font3">289元起</div>
+            </div>
+            <div class="box4-list-watch-last" onclick="window.open('https://www.mi.com/search?keyword=%E6%89%8B%E8%A1%A8%E6%89%8B%E7%8E%AF')">
+                <div class="box4-list-watch-last-font">
+                    <div class="box4-list-watch-last-font1">浏览更多</div>
+                    <div class="box4-list-watch-last-font2">热门</div>
+                </div>
+                
+            </div>
+        </div>
+    
+    </div>
+    <div class="box5">
+        <p class="box5-font1">家电</p>
+        <div class="box5-font2">热门</div>
+        <div class="box5-font3">电视影音</div>
+    </div>
+    <div class="box6">
+        <div class="box6-photo">
+            <div class="box6-photo2"></div>
+            <div class="box6-photo3"></div>
+        </div>
+        <div class="box6-list">
+            <div class="box6-list-tv" onclick="window.open('https://www.mi.com/buy/detail?product_id=14779')">
+                <div class="box6-list-tv-photo"></div>
+                <div class="box6-list-tv-photo-font1">小米电视6 65'' OLED</div>
+                <div class="box6-list-tv-photo-font2">小米电视6 65'' OLED</div>
+                <div class="box6-list-tv-photo-font3">6999元</div>
+            </div>
+            <div class="box6-list-tv" onclick="window.open('https://www.mi.com/buy/detail?product_id=14438')">
+                <div class="box6-list-tv-photo2"></div>
+                <div class="box6-list-tv-photo-font1">小米电视6 至尊版 65英寸</div>
+                <div class="box6-list-tv-photo-font2">画质新境界</div>
+                <div class="box6-list-tv-photo-font3">7499元</div>
+            </div>
+            <div class="box6-list-tv" onclick="window.open('https://www.mi.com/buy/detail?product_id=14417')">
+                <div class="box6-list-tv-photo3"></div>
+                <div class="box6-list-tv-photo-font1">小米电视 ES55 2022款</div>
+                <div class="box6-list-tv-photo-font2">多分区，画质轻旗舰</div>
+                <div class="box6-list-tv-photo-font3">2999元</div>
+            </div>
+            <div class="box6-list-tv" onclick="window.open('https://www.mi.com/buy/detail?product_id=13168')">
+                <div class="box6-list-tv-photo4"></div>
+                <div class="box6-list-tv-photo-font1">米家互联网对开门 540L</div>
+                <div class="box6-list-tv-photo-font2">重磅新品福利特惠</div>
+                <div class="box6-list-tv-photo-font3">2799元</div>
+            </div>
+            <div class="box6-list-tv" onclick="window.open('https://www.mi.com/buy/detail?product_id=12849')">
+                <div class="box6-list-tv-photo5"></div>
+                <div class="box6-list-tv-photo-font1">小米全面屏电视65英寸 E65X</div>
+                <div class="box6-list-tv-photo-font2">全面屏设计</div>
+                <div class="box6-list-tv-photo-font3">2699元</div>
+            </div>
+            <div class="box6-list-tv" onclick="window.open('https://www.mi.com/mitv4c/32')">
+                <div class="box6-list-tv-photo6"></div>
+                <div class="box6-list-tv-photo-font1">小米电视4C 32英寸</div>
+                <div class="box6-list-tv-photo-font2">高清液晶屏，人工智能系统</div>
+                <div class="box6-list-tv-photo-font3">849元</div>
+            </div>
+            <div class="box6-list-tv" onclick="window.open('https://www.mi.com/buy/detail?product_id=12809')">
+                <div class="box6-list-tv-photo7"></div>
+                <div class="box6-list-tv-photo-font1">Redmi智能电视A55</div>
+                <div class="box6-list-tv-photo-font2">澎湃音效影院级体验</div>
+                <div class="box6-list-tv-photo-font3">1799元</div>
+            </div>
+        </div>
+        
+      
+        </div>
+    <div class="box7">
+        <p class="box7-font1">生活电器</p>
+        <div class="box7-font2">扫地机</div>
+        <div class="box7-font3">空净</div>
+        <div class="box7-font4">清洁</div>
+        <div class="box7-font5">风扇</div>
+    </div>
+    <div class="box8">
+        <div class="box8-photo">
+            <div class="box8-photo2"></div>
+            <div class="box8-photo3"></div>
+        </div>
+        <div class="box8-list">
+            <div class="box8-list-tv" onclick="window.open('https://www.mi.com/buy/detail?product_id=14891')">
+                <div class="box8-list-tv-photo"></div>
+                <div class="box8-list-tv-photo-font1">米家扫拖机器人 2PRO</div>
+                <div class="box8-list-tv-photo-font2">扫拖除菌一步到位</div>
+                <div class="box8-list-tv-photo-font3">2499元</div>
+            </div>
+            <div class="box8-list-tv" onclick="window.open('https://www.mi.com/buy/detail?product_id=14505')">
+                <div class="box8-list-tv-photo2"></div>
+                <div class="box8-list-tv-photo-font1">米家扫拖机器人 2</div>
+                <div class="box8-list-tv-photo-font2">经典延续，全面升级</div>
+                <div class="box8-list-tv-photo-font3">1699元</div>
+            </div>
+            <div class="box8-list-tv" onclick="window.open('https://www.mi.com/buy/detail?product_id=14561')">
+                <div class="box8-list-tv-photo3"></div>
+                <div class="box8-list-tv-photo-font1">米家集尘扫拖机器人</div>
+                <div class="box8-list-tv-photo-font2">自动倒垃圾，45天手不粘尘</div>
+                <div class="box8-list-tv-photo-font3">2999元</div>
+            </div>
+            <div class="box8-list-tv" onclick="window.open('https://www.mi.com/buy/detail?product_id=12961')">
+                <div class="box8-list-tv-photo4"></div>
+                <div class="box8-list-tv-photo-font1">米家扫拖机器人1T</div>
+                <div class="box8-list-tv-photo-font2">3D精准避障，拖地不在碰撞</div>
+                <div class="box8-list-tv-photo-font3">1999元</div>
+            </div>
+            <div class="box8-list-tv" onclick="window.open('https://www.mi.com/buy/detail?product_id=14226')">
+                <div class="box8-list-tv-photo5"></div>
+                <div class="box8-list-tv-photo-font1">米家扫拖机器人 2C</div>
+                <div class="box8-list-tv-photo-font2">抗菌去渍二合一，开启生活新境界</div>
+                <div class="box8-list-tv-photo-font3">1299元</div>
+            </div>
+            <div class="box8-list-tv" onclick="window.open('https://www.mi.com/buy/detail?product_id=9527')">
+                <div class="box8-list-tv-photo6"></div>
+                <div class="box8-list-tv-photo-font1">米家扫拖机器人 1S</div>
+                <div class="box8-list-tv-photo-font2">看得明白扫得彻底</div>
+                <div class="box8-list-tv-photo-font3">1399元</div>
+            </div>
+            <div class="box8-list-tv" onclick="window.open('https://www.mi.com/buy/detail?product_id=13682')">
+                <div class="box8-list-tv-photo7"></div>
+                <div class="box8-list-tv-photo-font1">米家扫拖机器人 Pro</div>
+                <div class="box8-list-tv-photo-font2">AI智能识别 3D精准避障</div>
+                <div class="box8-list-tv-photo-font3">2699元</div>
+            </div>
+        </div>
+        
+      
+        </div>
+    <div class="box9" onclick="window.open('https://www.mi.com/buy/detail?product_id=13127')">
+        <div class="box9-photo"></div>
+    </div>
+    <div class="box10">
+        <p class="box10-font1">厨房电器</p>
+        <div class="box10-font2">净水器</div>
+        <div class="box10-font3">烟灶</div>
+        <div class="box10-font4">电饭煲</div>
+        <div class="box10-font5">微蒸烤</div>
+    </div>
+    <div class="box11">
+        <div class="box11-photo">
+            <div class="box11-photo2"></div>
+            <div class="box11-photo3"></div>
+        </div>
+        <div class="box11-list">
+            <div class="box11-list-tv" onclick="window.open('https://www.mi.com/buy/detail?product_id=14779')">
+                <div class="box11-list-tv-photo"></div>
+                <div class="box11-list-tv-photo-font1">小米净水器1200G</div>
+                <div class="box11-list-tv-photo-font2">3.2/min大流量，鲜活首杯水</div>
+                <div class="box11-list-tv-photo-font3">3499元</div>
+            </div>
+            <div class="box11-list-tv" onclick="window.open('https://www.mi.com/buy/detail?product_id=14438')">
+                <div class="box11-list-tv-photo2"></div>
+                <div class="box11-list-tv-photo-font1">小米净水器Q600</div>
+                <div class="box11-list-tv-photo-font2">净热一体，1秒速热，精选调温每℃</div>
+                <div class="box11-list-tv-photo-font3">3499元</div>
+            </div>
+            <div class="box11-list-tv" onclick="window.open('https://www.mi.com/buy/detail?product_id=14417')">
+                <div class="box11-list-tv-photo3"></div>
+                <div class="box11-list-tv-photo-font1">小米净水器H600G</div>
+                <div class="box11-list-tv-photo-font2">纯净生活双出水，六级过滤健康直饮</div>
+                <div class="box11-list-tv-photo-font3">1699元</div>
+            </div>
+            <div class="box11-list-tv" onclick="window.open('https://www.mi.com/buy/detail?product_id=13168')">
+                <div class="box11-list-tv-photo4"></div>
+                <div class="box11-list-tv-photo-font1">小米净水器600G</div>
+                <div class="box11-list-tv-photo-font2">600加仑通量，流速更快</div>
+                <div class="box11-list-tv-photo-font3">1499元</div>
+            </div>
+            <div class="box11-list-tv" onclick="window.open('https://www.mi.com/buy/detail?product_id=12849')">
+                <div class="box11-list-tv-photo5"></div>
+                <div class="box11-list-tv-photo-font1">小米净水器S1 800G</div>
+                <div class="box11-list-tv-photo-font2">APP检测水质，OLED屏显水龙头</div>
+                <div class="box11-list-tv-photo-font3">2199元</div>
+            </div>
+            <div class="box11-list-tv" onclick="window.open('https://www.mi.com/mitv4c/32')">
+                <div class="box11-list-tv-photo6"></div>
+                <div class="box11-list-tv-photo-font1">小米净水器H61000G</div>
+                <div class="box11-list-tv-photo-font2">双RO反渗透净化，稳定高效过滤</div>
+                <div class="box11-list-tv-photo-font3">2499元</div>
+            </div>
+            <div class="box11-list-tv" onclick="window.open('https://www.mi.com/buy/detail?product_id=12809')">
+                <div class="box11-list-tv-photo7"></div>
+                <div class="box11-list-tv-photo-font1">小米台式净饮机</div>
+                <div class="box11-list-tv-photo-font2">即虑即热</div>
+                <div class="box11-list-tv-photo-font3">1499元</div>
+            </div>
+        </div>
+        
+      
+    </div>
+    <div class="box12">
+        <p class="box12-font1">智能家居</p>
+        <div class="box12-font2">小爱音箱</div>
+        <div class="box12-font3">门锁</div>
+        <div class="box12-font4">路由器</div>
+        <div class="box12-font5">智能设备</div>
+    </div>
+    <div class="box13">
+        <div class="box13-photo">
+            <div class="box13-photo2"></div>
+            <div class="box13-photo3"></div>
+        </div>
+        <div class="box13-list">
+            <div class="box13-list-tv" onclick="window.open('https://www.mi.com/buy/detail?product_id=14779')">
+                <div class="box13-list-tv-photo"></div>
+                <div class="box13-list-tv-photo-font1">小米小爱音箱Play 增强版</div>
+                <div class="box13-list-tv-photo-font2">是音箱也是床头时钟</div>
+                <div class="box13-list-tv-photo-font3">129元</div>
+            </div>
+            <div class="box13-list-tv" onclick="window.open('https://www.mi.com/buy/detail?product_id=14438')">
+                <div class="box13-list-tv-photo2"></div>
+                <div class="box13-list-tv-photo-font1">Xiaomi Sound</div>
+                <div class="box13-list-tv-photo-font2">小米高保真智能音箱</div>
+                <div class="box13-list-tv-photo-font3">499元</div>
+            </div>
+            <div class="box13-list-tv" onclick="window.open('https://www.mi.com/buy/detail?product_id=14417')">
+                <div class="box13-list-tv-photo3"></div>
+                <div class="box13-list-tv-photo-font1">小米小爱音箱 Play</div>
+                <div class="box13-list-tv-photo-font2">听音乐，语音遥控家电</div>
+                <div class="box13-list-tv-photo-font3">99元</div>
+            </div>
+            <div class="box13-list-tv" onclick="window.open('https://www.mi.com/buy/detail?product_id=13168')">
+                <div class="box13-list-tv-photo4"></div>
+                <div class="box13-list-tv-photo-font1">小米小爱音箱Pro</div>
+                <div class="box13-list-tv-photo-font2">语音遥控5000+品牌主流家电</div>
+                <div class="box13-list-tv-photos-font3">299元</div>
+            </div>
+            <div class="box13-list-tv" onclick="window.open('https://www.mi.com/buy/detail?product_id=12849')">
+                <div class="box13-list-tv-photo5"></div>
+                <div class="box13-list-tv-photo-font1">小米AI音箱（第二代）</div>
+                <div class="box13-list-tv-photo-font2">小米AI音箱（第二代）</div>
+                <div class="box13-list-tv-photo-font3">189元</div>
+            </div>
+            <div class="box13-list-tv" onclick="window.open('https://www.mi.com/mitv4c/32')">
+                <div class="box13-list-tv-photo6"></div>
+                <div class="box13-list-tv-photo-font1">小米小爱触屏音箱</div>
+                <div class="box13-list-tv-photo-font2">好听，更好看</div>
+                <div class="box13-list-tv-photo-font3">249元</div>
+            </div>
+            <div class="box13-list-tv" onclick="window.open('https://www.mi.com/buy/detail?product_id=12809')">
+                <div class="box13-list-tv-photo7"></div>
+                <div class="box13-list-tv-photo-font1">小米小爱音箱</div>
+                <div class="box13-list-tv-photo-font2">全面升级 旗舰品质</div>
+                <div class="box13-list-tv-photo-font3">229元</div>
+            </div>
+        </div>
+        
+      
+    </div>
+    <div class="foot1">
+        <div class="foot1-box1">
+            <div class="foot1-box1-font">
+                预约维修服务
+            </div>    
+            <div class="foot1-box1-font">
+                7天无理由退货
+            </div> 
+            <div class="foot1-box1-font">
+                15天免费退货
+            </div> 
+            <div class="foot1-box1-font">
+                满69包邮
+            </div> 
+            <div class="foot1-box1-font">
+                520余家售后网点
+            </div> 
+        </div>
+        <div class="foot1-box2">
+            <div class="foot1-box2-font">
+                <div calss="foot1-box2-font2">帮助中心</div>
+                    <div class="foot1-box2-font3">账户管理</div>
+                    <div class="foot1-box2-font3">购物指南</div>
+                    <div class="foot1-box2-font3">订单操作</div>
+            </div>
+            <div class="foot1-box2-font">
+                <div calss="foot1-box2-font2">服务支持</div>
+                    <div class="foot1-box2-font3">售后政策</div>
+                    <div class="foot1-box2-font3">自助服务</div>
+                    <div class="foot1-box2-font3">相关下载</div>
+            </div>
+            <div class="foot1-box2-font">
+                <div calss="foot1-box2-font2">线下门店</div>
+                    <div class="foot1-box2-font3">小米之家</div>
+                    <div class="foot1-box2-font3">服务网点</div>
+                    <div class="foot1-box2-font3">授权体验店/专区</div>
+            </div>
+            <div class="foot1-box2-font">
+                <div calss="foot1-box2-font2">关于小米</div>
+                    <div class="foot1-box2-font3">了解小米</div>
+                    <div class="foot1-box2-font3">加入小米</div>
+                    <div class="foot1-box2-font3">投资者关系</div>
+                    <div class="foot1-box2-font3">企业社会责任</div>
+                    <div class="foot1-box2-font3">廉洁举报</div>
+            </div>
+            <div class="foot1-box2-font">
+                <div calss="foot1-box2-font2">关注我们</div>
+                    <div class="foot1-box2-font3">新浪微博</div>
+                    <div class="foot1-box2-font3">官方微信</div>
+                    <div class="foot1-box2-font3">联系我们</div>
+                    <div class="foot1-box2-font3">公益基金会</div>
+            </div>
+            <div class="foot1-box2-font">
+                <div calss="foot1-box2-font2">特色服务</div>
+                    <div class="foot1-box2-font3">F码通道</div>
+                    <div class="foot1-box2-font3">礼物码</div>
+                    <div class="foot1-box2-font3">防伪查询</div>
+            </div>
+        </div>
+        <div class="foot1-box3"></div>
+    </div>
+    <div class="foot2">
+        <div class="foot2-photo"></div>
+        <div class="foot2-font">
+            <div class="foot2-font2">小米商城 | MIUI | 米家 | 米聊 | 多看 | 游戏 | 政企服务 | 小米天猫店 | 小米集团隐私政策 | 小米公司儿童信息保护规则 | 小米商城隐私政策 | 小米商城用户协议 | 问题反馈 | Select Location</div>
+            <div class="foot2-font2">北京互联网法院法律服务工作站 | 中国消费者协会 | 北京市消费者协会</div>
+            <div class="foot2-font3">© mi.com 京ICP证110507号 京ICP备10046444号 京公网安备11010802020134号 京网文[2020]0276-042号</div>
+            <div class="foot2-font3">（京）网械平台备字（2018）第00005号 互联网药品信息服务资格证 (京)-非经营性-2014-0090 营业执照 医疗器械质量公告</div>
+            <div class="foot2-font3">增值电信业务许可证 网络食品经营备案 京食药网食备202010048   食品经营许可证</div>
+            <div class="foot2-font3">违法和不良信息举报电话：171-5104-4404 知识产权侵权投诉 本网站所列数据，除特殊说明，所有数据均出自我司实验室测试</div>
+        </div>
+        <div class="font2-photo2"></div>
+    </div>
+
+    <!-- <这次写到header3-list-square，问题是不显示，还有就是header2-font-list不显示的问题> -->
+</body>
+</html>
