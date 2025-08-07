@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>僵尸危机3</title>
+    <meta charset="UTF-8">
+    <!-- 引入Ruffle播放器 -->
+    <script src="https://unpkg.com/@ruffle-rs/ruffle"></script>
+    <style>
+        body { 
+            margin: 0; 
+            background: #222; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            height: 100vh; 
+        }
+        #game-container {
+            width: 800px;  /* 根据游戏尺寸调整 */
+            height: 600px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.5);
+        }
+    </style>
+</head>
+<body>
+    <div id="game-container"></div>
+
+    <script>
+        window.RufflePlayer = window.RufflePlayer || {};
+        window.addEventListener("DOMContentLoaded", () => {
+            const container = document.getElementById("game-container");
+            const ruffle = window.RufflePlayer.newest();
+            const player = ruffle.createPlayer();
+            container.appendChild(player);
+            
+            // 加载你的SWF文件
+            player.load("僵尸危机3.swf");
+        });
+    </script>
+</body>
+</html>
