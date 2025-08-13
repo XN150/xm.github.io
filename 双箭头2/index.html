@@ -1,42 +1,365 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh-CN">
 <head>
-    <title>双箭头2</title>
     <meta charset="UTF-8">
-    <!-- 引入Ruffle播放器 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>双箭头2 - 响应式游戏</title>
     <script src="https://unpkg.com/@ruffle-rs/ruffle"></script>
     <style>
-        body { 
-            margin: 0; 
-            background: #222; 
-            display: flex; 
-            justify-content: center; 
-            align-items: center; 
-            height: 100vh; 
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1a2a6c, #2c3e50, #4a235a);
+            color: #fff;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 25px;
+            padding: 20px;
+            width: 100%;
+            max-width: 1000px;
+            background: rgba(0, 0, 0, 0.4);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        h1 {
+            font-size: 2.8rem;
+            margin-bottom: 10px;
+            color: #ffcc00;
+            text-shadow: 0 0 10px rgba(255, 204, 0, 0.5);
+            letter-spacing: 2px;
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.8;
+            max-width: 700px;
+            margin: 0 auto 20px;
+        }
+        
+        .controls {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+        
+        .btn {
+            background: linear-gradient(to right, #ff8c00, #ff6600);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(255, 102, 0, 0.3);
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(255, 102, 0, 0.5);
+        }
+        
+        .btn:active {
+            transform: translateY(1px);
+        }
+        
+        .btn.secondary {
+            background: linear-gradient(to right, #3498db, #2980b9);
+            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.3);
+        }
+        
+        .size-controls {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            background: rgba(0, 0, 0, 0.3);
+            padding: 12px 20px;
+            border-radius: 50px;
+            margin-top: 15px;
+        }
+        
+        .size-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .size-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+        
+        .size-display {
+            min-width: 100px;
+            text-align: center;
+            font-weight: bold;
+        }
+        
+        #game-wrapper {
+            width: 100%;
+            max-width: 1000px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+        
         #game-container {
-            width: 960px;  /* 根据游戏尺寸调整 */
-            height: 720px;
-            box-shadow: 0 0 20px rgba(0,0,0,0.5);
+            width: 100%;
+            height: 0;
+            padding-bottom: 75%; /* 4:3 宽高比 (720/960=0.75) */
+            position: relative;
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.4s ease;
+        }
+        
+        #game-container.fullscreen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1000;
+            padding-bottom: 0;
+            border-radius: 0;
+        }
+        
+        ruffle-player {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        
+        .instructions {
+            background: rgba(0, 0, 0, 0.4);
+            padding: 20px;
+            border-radius: 15px;
+            margin-top: 25px;
+            width: 100%;
+            max-width: 1000px;
+        }
+        
+        .instructions h2 {
+            color: #00ccff;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        
+        .instructions ul {
+            padding-left: 25px;
+            line-height: 1.8;
+        }
+        
+        .instructions li {
+            margin-bottom: 10px;
+        }
+        
+        .instructions strong {
+            color: #ffcc00;
+        }
+        
+        footer {
+            margin-top: auto;
+            padding: 20px;
+            text-align: center;
+            opacity: 0.7;
+            font-size: 0.9rem;
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.2rem;
+            }
+            
+            .subtitle {
+                font-size: 1rem;
+            }
+            
+            .controls {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .btn {
+                width: 100%;
+                max-width: 300px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 1.8rem;
+            }
+            
+            .size-controls {
+                width: 100%;
+                justify-content: center;
+            }
         }
     </style>
 </head>
 <body>
-    <div id="game-container"></div>
+    <header>
+        <h1>双箭头2</h1>
+        <p class="subtitle">经典双人射击游戏 - 调整下方控制按钮改变游戏窗口大小</p>
+        
+        <div class="controls">
+            <button id="fullscreen-btn" class="btn">全屏模式</button>
+            <button id="reset-btn" class="btn secondary">重置尺寸</button>
+        </div>
+        
+        <div class="size-controls">
+            <button id="size-down" class="size-btn">-</button>
+            <div class="size-display">100%</div>
+            <button id="size-up" class="size-btn">+</button>
+        </div>
+    </header>
+    
+    <div id="game-wrapper">
+        <div id="game-container">
+            <!-- Ruffle播放器将在这里加载 -->
+        </div>
+    </div>
+    
+    <div class="instructions">
+        <h2>游戏说明</h2>
+        <ul>
+            <li>使用<strong>WASD键</strong>控制蓝色角色移动，<strong>空格键</strong>射击</li>
+            <li>使用<strong>方向键</strong>控制红色角色移动，<strong>Enter键</strong>射击</li>
+            <li>收集道具增强武器威力</li>
+            <li>击败所有敌人并到达出口通关</li>
+            <li>双人合作模式需要两个玩家同时进行</li>
+        </ul>
+    </div>
+    
+    <footer>
+        <p>© 2023 双箭头2经典游戏 | 使用Ruffle播放器</p>
+    </footer>
 
     <script>
-        window.RufflePlayer = window.RufflePlayer || {};
-        window.addEventListener("DOMContentLoaded", () => {
-            const container = document.getElementById("game-container");
+        document.addEventListener('DOMContentLoaded', () => {
+            const container = document.getElementById('game-container');
+            const gameWrapper = document.getElementById('game-wrapper');
+            const sizeDisplay = document.querySelector('.size-display');
+            const sizeDownBtn = document.getElementById('size-down');
+            const sizeUpBtn = document.getElementById('size-up');
+            const resetBtn = document.getElementById('reset-btn');
+            const fullscreenBtn = document.getElementById('fullscreen-btn');
+            
+            // 初始尺寸设置
+            let scale = 1;
+            const maxScale = 1.5;
+            const minScale = 0.6;
+            const scaleStep = 0.1;
+            
+            // 更新尺寸显示
+            function updateSizeDisplay() {
+                sizeDisplay.textContent = `${Math.round(scale * 100)}%`;
+                gameWrapper.style.maxWidth = `${1000 * scale}px`;
+            }
+            
+            // 缩小游戏
+            sizeDownBtn.addEventListener('click', () => {
+                if (scale > minScale) {
+                    scale -= scaleStep;
+                    updateSizeDisplay();
+                }
+            });
+            
+            // 放大游戏
+            sizeUpBtn.addEventListener('click', () => {
+                if (scale < maxScale) {
+                    scale += scaleStep;
+                    updateSizeDisplay();
+                }
+            });
+            
+            // 重置尺寸
+            resetBtn.addEventListener('click', () => {
+                scale = 1;
+                updateSizeDisplay();
+                if (container.classList.contains('fullscreen')) {
+                    exitFullscreen();
+                }
+            });
+            
+            // 全屏功能
+            fullscreenBtn.addEventListener('click', () => {
+                if (!container.classList.contains('fullscreen')) {
+                    container.classList.add('fullscreen');
+                    fullscreenBtn.textContent = '退出全屏';
+                } else {
+                    exitFullscreen();
+                }
+            });
+            
+            // 退出全屏
+            function exitFullscreen() {
+                container.classList.remove('fullscreen');
+                fullscreenBtn.textContent = '全屏模式';
+            }
+            
+            // 初始化显示
+            updateSizeDisplay();
+            
+            // 加载Ruffle播放器
+            window.RufflePlayer = window.RufflePlayer || {};
             const ruffle = window.RufflePlayer.newest();
             const player = ruffle.createPlayer();
             container.appendChild(player);
             
-            // 加载你的SWF文件
-            player.load("twin-shot-2.swf");
+            // 加载游戏SWF文件
+            player.load("twin-shot-2.swf").then(() => {
+                console.log("游戏加载成功");
+            }).catch((e) => {
+                console.error("游戏加载失败:", e);
+                container.innerHTML = `
+                    <div style="position:absolute; top:0; left:0; width:100%; height:100%; 
+                                display:flex; flex-direction:column; justify-content:center; 
+                                align-items:center; background:rgba(0,0,0,0.8); color:white; 
+                                padding:20px; text-align:center;">
+                        <h2 style="color:#ff5555; margin-bottom:20px;">游戏加载失败</h2>
+                        <p>无法加载游戏文件 twin-shot-2.swf</p>
+                        <p style="margin-top:10px; font-size:0.9em; opacity:0.7;">${e.message}</p>
+                        <button onclick="window.location.reload()" 
+                                style="margin-top:25px; padding:10px 25px; background:#ff6600; 
+                                       border:none; border-radius:5px; color:white; cursor:pointer;">
+                            重新加载
+                        </button>
+                    </div>
+                `;
+            });
         });
     </script>
 </body>
-
 </html>
-
