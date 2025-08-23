@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>中国象棋NES版 - 经典棋类游戏</title>
+    <script src="https://unpkg.com/nes-js@0.1.0/dist/nes.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Microsoft YaHei', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #d9a466, #8b4513, #6b4423);
+            color: #f5f5dc;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 25px;
+            padding: 20px;
+            width: 100%;
+            max-width: 1000px;
+            background: rgba(139, 69, 19, 0.8);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+            border: 2px solid #d9a466;
+        }
+        
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 10px;
+            color: #ffd700;
+            text-shadow: 3px 3px 0px rgba(0, 0, 0, 0.3);
+            letter-spacing: 2px;
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 700px;
+            margin: 0 auto 20px;
+            color: #f5f5dc;
+        }
+        
+        .controls {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+        
+        .btn {
+            background: linear-gradient(to right, #8b4513, #6b4423);
+            color: #ffd700;
+            border: 2px solid #d9a466;
+            padding: 12px 25px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+            background: linear-gradient(to right, #6b4423, #8b4513);
+        }
+        
+        .btn:active {
+            transform: translateY(1px);
+        }
+        
+        .btn.secondary {
+            background: linear-gradient(to right, #654321, #8b4513);
+            color: #f5f5dc;
+        }
+        
+        .size-controls {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            background: rgba(107, 68, 35, 0.6);
+            padding: 12px 20px;
+            border-radius: 8px;
+            margin-top: 15px;
+            border: 1px solid #d9a466;
+        }
+        
+        .size-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            background: rgba(217, 164, 102, 0.3);
+            color: #ffd700;
+            border: 1px solid #d9a466;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-weight: bold;
+        }
+        
+        .size-btn:hover {
+            background: rgba(217, 164, 102, 0.5);
+        }
+        
+        .size-display {
+            min-width: 100px;
+            text-align: center;
+            font-weight: bold;
+            color: #ffd700;
+        }
+        
+        #game-wrapper {
+            width: 100%;
+            max-width: 1000px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+        
+        #game-container {
+            width: 100%;
+            height: 0;
+            padding-bottom: 75%; /* 4:3 宽高比 */
+            position: relative;
+            background: rgba(139, 69, 19, 0.7);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+            border: 3px solid #d9a466;
+            transition: all 0.4s ease;
+        }
+        
+        #game-container.fullscreen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1000;
+            padding-bottom: 0;
+            border-radius: 0;
+        }
+        
+        #nes-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            image-rendering: pixelated;
+        }
+        
+        .instructions {
+            background: rgba(139, 69, 19, 0.8);
+            padding: 20px;
+            border-radius: 15px;
+            margin-top: 25px;
+            width: 100%;
+            max-width: 1000px;
+            color: #f5f5dc;
+            border: 2px solid #d9a466;
+        }
+        
+        .instructions h2 {
+            color: #ffd700;
+            margin-bottom: 15px;
+            text-align: center;
+            text-shadow: 2px 2px 0px rgba(0, 0, 0, 0.3);
+        }
+        
+        .instructions ul {
+            padding-left: 25px;
+            line-height: 1.8;
+        }
+        
+        .instructions li {
+            margin-bottom: 10px;
+        }
+        
+        .instructions strong {
+            color: #ffd700;
+        }
+        
+        .piece-info {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .piece {
+            text-align: center;
+            background: rgba(107, 68, 35, 0.7);
+            padding: 15px;
+            border-radius: 8px;
+            width: 140px;
+            border: 1px solid #d9a466;
+        }
+        
+        .piece h3 {
+            color: #ffd700;
+            margin-bottom: 10px;
+        }
+        
+        footer {
+            margin-top: auto;
+            padding: 20px;
+            text-align: center;
+            opacity: 0.9;
+            font-size: 0.9rem;
+            color: #f5f5dc;
+            width: 100%;
+            max-width: 1000px;
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+            
+            .subtitle {
+                font-size: 1rem;
+            }
+            
+            .controls {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .btn {
+                width: 100%;
+                max-width: 300px;
+            }
+            
+            .piece-info {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .size-controls {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>中国象棋NES版</h1>
+        <p class="subtitle">调整下方控制按钮改变游戏窗口大小，体验经典中国象棋！</p>
+        
+        <div class="controls">
+            <button id="fullscreen-btn" class="btn">全屏模式</button>
+            <button id="reset-btn" class="btn secondary">重置尺寸</button>
+            <button id="save-btn" class="btn">保存游戏</button>
+            <button id="load-btn" class="btn secondary">读取存档</button>
+        </div>
+        
+        <div class="size-controls">
+            <button id="size-down" class="size-btn">-</button>
+            <div class="size-display">100%</div>
+            <button id="size-up" class="size-btn">+</button>
+        </div>
+    </header>
+    
+    <div id="game-wrapper">
+        <div id="game-container">
+            <canvas id="nes-canvas"></canvas>
+        </div>
+    </div>
+    
+    <div class="instructions">
+        <h2>游戏说明</h2>
+        <ul>
+            <li>使用<strong>方向键</strong>移动光标选择棋子</li>
+            <li>按<strong>A键</strong>选择棋子/放置棋子</li>
+            <li>按<strong>B键</strong>取消选择/返回</li>
+            <li>按<strong>开始键</strong>暂停游戏/打开菜单</li>
+            <li>游戏目标：将死对方的将/帅</li>
+            <li>遵循传统中国象棋规则</li>
+        </ul>
+        
+        <h2 style="margin-top: 20px;">棋子介绍</h2>
+        <div class="piece-info">
+            <div class="piece">
+                <h3>将/帅</h3>
+                <p>只能在九宫格内移动，每次一步</p>
+            </div>
+            <div class="piece">
+                <h3>士/仕</h3>
+                <p>斜线移动，只能在九宫格内</p>
+            </div>
+            <div class="piece">
+                <h3>象/相</h3>
+                <p>走田字，不能过河</p>
+            </div>
+            <div class="piece">
+                <h3>车</h3>
+                <p>直线移动，距离不限</p>
+            </div>
+            <div class="piece">
+                <h3>马</h3>
+                <p>走日字，蹩马腿</p>
+            </div>
+            <div class="piece">
+                <h3>炮</h3>
+                <p>直线移动，吃子需隔一子</p>
+            </div>
+            <div class="piece">
+                <h3>兵/卒</h3>
+                <p>只能向前，过河后可左右移动</p>
+            </div>
+        </div>
+    </div>
+    
+    <footer>
+        <p>美汁汁 | 中国象棋NES版 - 传统文化经典游戏</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const container = document.getElementById('game-container');
+            const gameWrapper = document.getElementById('game-wrapper');
+            const sizeDisplay = document.querySelector('.size-display');
+            const sizeDownBtn = document.getElementById('size-down');
+            const sizeUpBtn = document.getElementById('size-up');
+            const resetBtn = document.getElementById('reset-btn');
+            const fullscreenBtn = document.getElementById('fullscreen-btn');
+            const saveBtn = document.getElementById('save-btn');
+            const loadBtn = document.getElementById('load-btn');
+            
+            // 初始尺寸设置
+            let scale = 1;
+            const maxScale = 1.5;
+            const minScale = 0.6;
+            const scaleStep = 0.1;
+            
+            // 更新尺寸显示
+            function updateSizeDisplay() {
+                sizeDisplay.textContent = `${Math.round(scale * 100)}%`;
+                gameWrapper.style.maxWidth = `${1000 * scale}px`;
+            }
+            
+            // 缩小游戏
+            sizeDownBtn.addEventListener('click', () => {
+                if (scale > minScale) {
+                    scale -= scaleStep;
+                    updateSizeDisplay();
+                }
+            });
+            
+            // 放大游戏
+            sizeUpBtn.addEventListener('click', () => {
+                if (scale < maxScale) {
+                    scale += scaleStep;
+                    updateSizeDisplay();
+                }
+            });
+            
+            // 重置尺寸
+            resetBtn.addEventListener('click', () => {
+                scale = 1;
+                updateSizeDisplay();
+                if (container.classList.contains('fullscreen')) {
+                    exitFullscreen();
+                }
+            });
+            
+            // 全屏功能
+            fullscreenBtn.addEventListener('click', () => {
+                if (!container.classList.contains('fullscreen')) {
+                    container.classList.add('fullscreen');
+                    fullscreenBtn.textContent = '退出全屏';
+                } else {
+                    exitFullscreen();
+                }
+            });
+            
+            // 退出全屏
+            function exitFullscreen() {
+                container.classList.remove('fullscreen');
+                fullscreenBtn.textContent = '全屏模式';
+            }
+            
+            // 初始化显示
+            updateSizeDisplay();
+            
+            // 初始化NES模拟器
+            const canvas = document.getElementById('nes-canvas');
+            const emulator = new NES(canvas);
+            
+            // 加载NES游戏
+            function loadNESGame() {
+                fetch('chinese-chess.nes')
+                    .then(response => response.arrayBuffer())
+                    .then(buffer => {
+                        emulator.loadROM(new Uint8Array(buffer));
+                        emulator.start();
+                    })
+                    .catch(e => {
+                        console.error("游戏加载失败:", e);
+                        container.innerHTML = `
+                            <div style="position:absolute; top:0; left:0; width:100%; height:100%; 
+                                        display:flex; flex-direction:column; justify-content:center; 
+                                        align-items:center; background:rgba(139,69,19,0.9); color:#f5f5dc; 
+                                        padding:20px; text-align:center; border-radius:10px;">
+                                <h2 style="color:#ffd700; margin-bottom:20px;">游戏加载失败</h2>
+                                <p>无法加载游戏文件 chinese-chess.nes</p>
+                                <p style="margin-top:10px; font-size:0.9em; opacity:0.7;">${e.message}</p>
+                                <button onclick="window.location.reload()" 
+                                        style="margin-top:25px; padding:10px 25px; background:#8b4513; 
+                                               border:2px solid #d9a466; border-radius:8px; color:#ffd700; 
+                                               cursor:pointer; font-weight:bold;">
+                                    重新加载
+                                </button>
+                            </div>
+                        `;
+                    });
+            }
+            
+            // 保存游戏
+            saveBtn.addEventListener('click', () => {
+                alert('存档功能已触发！在实际实现中，这里会保存游戏状态。');
+            });
+            
+            // 加载存档
+            loadBtn.addEventListener('click', () => {
+                alert('读档功能已触发！在实际实现中，这里会加载游戏状态。');
+            });
+            
+            // 开始加载游戏
+            loadNESGame();
+            
+            // 键盘控制
+            document.addEventListener('keydown', (e) => {
+                // 这里可以添加自定义键盘控制
+                // 例如：按ESC退出全屏
+                if (e.key === 'Escape' && container.classList.contains('fullscreen')) {
+                    exitFullscreen();
+                }
+            });
+        });
+    </script>
+</body>
+</html>
