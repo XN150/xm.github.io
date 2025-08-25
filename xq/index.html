@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>中国象棋NES版 - 经典棋类游戏</title>
-    <script src="https://unpkg.com/nes-js@0.1.0/dist/nes.min.js"></script>
+    <script src="https://unpkg.com/jsnes/dist/jsnes.min.js"></script>
     <style>
         * {
             margin: 0;
@@ -230,6 +230,31 @@
             max-width: 1000px;
         }
         
+        .loading {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            color: #ffd700;
+            font-size: 1.2rem;
+        }
+        
+        .loading-spinner {
+            border: 5px solid rgba(217, 164, 102, 0.3);
+            border-top: 5px solid #ffd700;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
         @media (max-width: 768px) {
             h1 {
                 font-size: 2.5rem;
@@ -275,8 +300,7 @@
         <div class="controls">
             <button id="fullscreen-btn" class="btn">全屏模式</button>
             <button id="reset-btn" class="btn secondary">重置尺寸</button>
-            <button id="save-btn" class="btn">保存游戏</button>
-            <button id="load-btn" class="btn secondary">读取存档</button>
+            <button id="restart-btn" class="btn">重新开始</button>
         </div>
         
         <div class="size-controls">
@@ -288,7 +312,11 @@
     
     <div id="game-wrapper">
         <div id="game-container">
-            <canvas id="nes-canvas"></canvas>
+            <div class="loading">
+                <div class="loading-spinner"></div>
+                <p>加载游戏中...</p>
+            </div>
+            <canvas id="nes-canvas" style="display:none;"></canvas>
         </div>
     </div>
     
@@ -349,8 +377,9 @@
             const sizeUpBtn = document.getElementById('size-up');
             const resetBtn = document.getElementById('reset-btn');
             const fullscreenBtn = document.getElementById('fullscreen-btn');
-            const saveBtn = document.getElementById('save-btn');
-            const loadBtn = document.getElementById('load-btn');
+            const restartBtn = document.getElementById('restart-btn');
+            const canvas = document.getElementById('nes-canvas');
+            const loadingElement = document.querySelector('.loading');
             
             // 初始尺寸设置
             let scale = 1;
@@ -409,46 +438,85 @@
             updateSizeDisplay();
             
             // 初始化NES模拟器
-            const canvas = document.getElementById('nes-canvas');
-            const emulator = new NES(canvas);
+            const nes = new JSNES({
+                onFrame: function(frame) {
+                    // 每帧渲染
+                },
+                onAudioSample: function(sample) {
+                    // 音频处理
+                }
+            });
             
             // 加载NES游戏
             function loadNESGame() {
-                fetch('chinese-chess.nes')
-                    .then(response => response.arrayBuffer())
-                    .then(buffer => {
-                        emulator.loadROM(new Uint8Array(buffer));
-                        emulator.start();
-                    })
-                    .catch(e => {
-                        console.error("游戏加载失败:", e);
-                        container.innerHTML = `
-                            <div style="position:absolute; top:0; left:0; width:100%; height:100%; 
-                                        display:flex; flex-direction:column; justify-content:center; 
-                                        align-items:center; background:rgba(139,69,19,0.9); color:#f5f5dc; 
-                                        padding:20px; text-align:center; border-radius:10px;">
-                                <h2 style="color:#ffd700; margin-bottom:20px;">游戏加载失败</h2>
-                                <p>无法加载游戏文件 chinese-chess.nes</p>
-                                <p style="margin-top:10px; font-size:0.9em; opacity:0.7;">${e.message}</p>
-                                <button onclick="window.location.reload()" 
-                                        style="margin-top:25px; padding:10px 25px; background:#8b4513; 
-                                               border:2px solid #d9a466; border-radius:8px; color:#ffd700; 
-                                               cursor:pointer; font-weight:bold;">
-                                    重新加载
-                                </button>
-                            </div>
-                        `;
-                    });
+                // 显示加载中
+                loadingElement.style.display = 'block';
+                canvas.style.display = 'none';
+                
+                // 使用示例ROM（实际使用时替换为您的中国象棋NES ROM）
+                // 这里使用了一个简单的测试ROM
+                const testRom = [
+                    // 这里应该是ROM的二进制数据
+                    // 由于无法直接提供ROM文件，这里使用一个虚拟的加载过程
+                ];
+                
+                try {
+                    // 尝试加载ROM
+                    setTimeout(() => {
+                        // 模拟加载过程
+                        if (testRom && testRom.length > 0) {
+                            // 如果成功加载
+                            loadingElement.style.display = 'none';
+                            canvas.style.display = 'block';
+                            
+                            // 初始化模拟器
+                            nes.loadROM(testRom);
+                            nes.start();
+                            
+                            // 设置画布
+                            const context = canvas.getContext('2d');
+                            const imageData = context.createImageData(256, 240);
+                            
+                            // 启动渲染循环
+                            function renderFrame() {
+                                nes.frame();
+                                context.putImageData(imageData, 0, 0);
+                                requestAnimationFrame(renderFrame);
+                            }
+                            
+                            renderFrame();
+                        } else {
+                            // 如果加载失败
+                            showError("无法加载游戏ROM文件");
+                        }
+                    }, 2000); // 模拟2秒加载时间
+                } catch (e) {
+                    showError("模拟器初始化失败: " + e.message);
+                }
             }
             
-            // 保存游戏
-            saveBtn.addEventListener('click', () => {
-                alert('存档功能已触发！在实际实现中，这里会保存游戏状态。');
-            });
+            // 显示错误信息
+            function showError(message) {
+                loadingElement.innerHTML = `
+                    <div style="color: #ff6b6b; text-align: center;">
+                        <h2>加载失败</h2>
+                        <p>${message}</p>
+                        <p>请确保您有合法的游戏ROM文件</p>
+                        <button onclick="window.location.reload()" 
+                                style="margin-top:20px; padding:10px 20px; background:#8b4513; 
+                                       border:2px solid #d9a466; border-radius:5px; color:#ffd700; 
+                                       cursor:pointer;">
+                            重新加载
+                        </button>
+                    </div>
+                `;
+            }
             
-            // 加载存档
-            loadBtn.addEventListener('click', () => {
-                alert('读档功能已触发！在实际实现中，这里会加载游戏状态。');
+            // 重新开始游戏
+            restartBtn.addEventListener('click', () => {
+                if (confirm('确定要重新开始游戏吗？')) {
+                    window.location.reload();
+                }
             });
             
             // 开始加载游戏
@@ -460,6 +528,33 @@
                 // 例如：按ESC退出全屏
                 if (e.key === 'Escape' && container.classList.contains('fullscreen')) {
                     exitFullscreen();
+                }
+                
+                // 模拟NES控制器输入
+                switch(e.key) {
+                    case 'ArrowUp':
+                        // 上方向键
+                        break;
+                    case 'ArrowDown':
+                        // 下方向键
+                        break;
+                    case 'ArrowLeft':
+                        // 左方向键
+                        break;
+                    case 'ArrowRight':
+                        // 右方向键
+                        break;
+                    case 'a':
+                    case 'A':
+                        // A键
+                        break;
+                    case 's':
+                    case 'S':
+                        // B键
+                        break;
+                    case 'Enter':
+                        // 开始键
+                        break;
                 }
             });
         });
