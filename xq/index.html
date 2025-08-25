@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>中国象棋NES版 - 经典棋类游戏</title>
     <style>
-        /* 样式保持不变，与您提供的相同 */
         * {
             margin: 0;
             padding: 0;
@@ -157,7 +156,7 @@
             border-radius: 0;
         }
         
-        #nes-canvas {
+        #chess-canvas {
             position: absolute;
             top: 0;
             left: 0;
@@ -366,7 +365,8 @@
         <div class="controls">
             <button id="fullscreen-btn" class="btn">全屏模式</button>
             <button id="reset-btn" class="btn secondary">重置尺寸</button>
-            <button id="restart-btn" class="btn">重新加载</button>
+            <button id="restart-btn" class="btn">重新开始</button>
+            <button id="undo-btn" class="btn secondary">悔棋</button>
         </div>
         
         <div class="size-controls">
@@ -378,7 +378,7 @@
     
     <div id="game-wrapper">
         <div id="game-container">
-            <div class="loading">
+            <div class="loading" id="loading">
                 <div class="loading-spinner"></div>
                 <h3>游戏加载中...</h3>
                 
@@ -389,38 +389,31 @@
                 <div class="loading-steps">
                     <div class="loading-step">
                         <div class="step-icon">⏳</div>
-                        <div class="step-text step-active" id="step-1">加载模拟器核心</div>
+                        <div class="step-text step-active" id="step-1">初始化游戏引擎</div>
                     </div>
                     <div class="loading-step">
                         <div class="step-icon">⏳</div>
-                        <div class="step-text step-pending" id="step-2">获取游戏ROM</div>
+                        <div class="step-text step-pending" id="step-2">创建棋盘</div>
                     </div>
                     <div class="loading-step">
                         <div class="step-icon">⏳</div>
-                        <div class="step-text step-pending" id="step-3">初始化游戏</div>
+                        <div class="step-text step-pending" id="step-3">设置棋子</div>
                     </div>
                     <div class="loading-step">
                         <div class="step-icon">⏳</div>
                         <div class="step-text step-pending" id="step-4">启动游戏</div>
                     </div>
                 </div>
-                
-                <div class="alternative">
-                    <p>如果加载时间过长，您可以：</p>
-                    <button id="try-alternative" class="btn" style="margin-top: 10px;">尝试备用方案</button>
-                </div>
             </div>
-            <canvas id="nes-canvas" style="display:none;"></canvas>
+            <canvas id="chess-canvas"></canvas>
         </div>
     </div>
     
     <div class="instructions">
         <h2>游戏说明</h2>
         <ul>
-            <li>使用<strong>方向键</strong>移动光标选择棋子</li>
-            <li>按<strong>A键</strong>选择棋子/放置棋子</li>
-            <li>按<strong>B键</strong>取消选择/返回</li>
-            <li>按<strong>开始键</strong>暂停游戏/打开菜单</li>
+            <li><strong>点击棋子</strong>选择它，然后<strong>点击目标位置</strong>移动</li>
+            <li>红色方先行，轮流走子</li>
             <li>游戏目标：将死对方的将/帅</li>
             <li>遵循传统中国象棋规则</li>
         </ul>
@@ -460,158 +453,11 @@
     
     <footer>
         <p>美汁汁 | 中国象棋NES版 - 传统文化经典游戏</p>
+        <p>当前玩家: <span id="current-player">红方</span></p>
     </footer>
 
     <script>
-        // 内联的NES模拟器核心代码
-        // 这里只包含模拟器的基本框架，实际实现需要更多代码
-        // 为了简化，我们使用一个简化的模拟器实现
-        
-        // NES模拟器构造函数
-        function JSNES(options) {
-            this.options = options || {};
-            this.cpu = new CPU(this);
-            this.ppu = new PPU(this);
-            this.papu = new PAPU(this);
-            this.cartridge = null;
-            this.controllers = [new Controller(), new Controller()];
-            this.romData = null;
-            
-            // 帧回调
-            this.onFrame = this.options.onFrame || function() {};
-            // 音频采样回调
-            this.onAudioSample = this.options.onAudioSample || function() {};
-        }
-        
-        JSNES.prototype = {
-            loadROM: function(data) {
-                this.romData = data;
-                // 这里简化ROM加载过程
-                console.log("ROM加载成功，数据大小:", data.length);
-                
-                // 模拟加载完成后的操作
-                setTimeout(function() {
-                    // 在实际实现中，这里会进行ROM解析和游戏初始化
-                    console.log("游戏初始化完成");
-                }, 1000);
-            },
-            
-            // 其他模拟器方法...
-            frame: function() {
-                // 模拟帧处理
-                if (this.onFrame) {
-                    // 生成模拟图像数据
-                    var canvas = document.getElementById('nes-canvas');
-                    if (canvas && canvas.getContext) {
-                        var ctx = canvas.getContext('2d');
-                        var width = canvas.width;
-                        var height = canvas.height;
-                        
-                        // 创建一个简单的棋盘背景
-                        ctx.fillStyle = '#8b4513';
-                        ctx.fillRect(0, 0, width, height);
-                        
-                        // 绘制棋盘网格
-                        ctx.strokeStyle = '#000000';
-                        ctx.lineWidth = 2;
-                        ctx.beginPath();
-                        
-                        // 绘制横线
-                        for (var i = 0; i < 10; i++) {
-                            ctx.moveTo(50, 50 + i * 50);
-                            ctx.lineTo(width - 50, 50 + i * 50);
-                        }
-                        
-                        // 绘制竖线
-                        for (var j = 0; j < 9; j++) {
-                            // 上半部分
-                            ctx.moveTo(50 + j * 50, 50);
-                            ctx.lineTo(50 + j * 50, 50 + 4 * 50);
-                            
-                            // 下半部分
-                            ctx.moveTo(50 + j * 50, 50 + 5 * 50);
-                            ctx.lineTo(50 + j * 50, 50 + 9 * 50);
-                        }
-                        
-                        // 绘制楚河汉界
-                        ctx.font = '30px Microsoft YaHei';
-                        ctx.fillStyle = '#000000';
-                        ctx.fillText('楚河', width/2 - 60, 50 + 4.5 * 50 - 10);
-                        ctx.fillText('汉界', width/2 + 10, 50 + 4.5 * 50 - 10);
-                        
-                        ctx.stroke();
-                        
-                        // 绘制棋子 (简化版)
-                        ctx.font = '20px Microsoft YaHei';
-                        ctx.textAlign = 'center';
-                        ctx.textBaseline = 'middle';
-                        
-                        // 红方棋子
-                        ctx.fillStyle = '#ff0000';
-                        ctx.beginPath();
-                        ctx.arc(50 + 4 * 50, 50 + 9 * 50, 20, 0, Math.PI * 2);
-                        ctx.fill();
-                        ctx.stroke();
-                        ctx.fillStyle = '#ffffff';
-                        ctx.fillText('帅', 50 + 4 * 50, 50 + 9 * 50);
-                        
-                        // 黑方棋子
-                        ctx.fillStyle = '#000000';
-                        ctx.beginPath();
-                        ctx.arc(50 + 4 * 50, 50 + 0 * 50, 20, 0, Math.PI * 2);
-                        ctx.fill();
-                        ctx.stroke();
-                        ctx.fillStyle = '#ffffff';
-                        ctx.fillText('将', 50 + 4 * 50, 50 + 0 * 50);
-                        
-                        // 调用帧回调
-                        this.onFrame(ctx);
-                    }
-                }
-            },
-            
-            start: function() {
-                console.log("游戏开始");
-                // 启动游戏循环
-                var self = this;
-                this.interval = setInterval(function() {
-                    self.frame();
-                }, 1000 / 60); // 60 FPS
-            },
-            
-            stop: function() {
-                if (this.interval) {
-                    clearInterval(this.interval);
-                    this.interval = null;
-                }
-            }
-        };
-        
-        // 模拟CPU
-        function CPU(nes) {
-            this.nes = nes;
-            // CPU实现...
-        }
-        
-        // 模拟PPU (图像处理单元)
-        function PPU(nes) {
-            this.nes = nes;
-            // PPU实现...
-        }
-        
-        // 模拟PAPU (音频处理单元)
-        function PAPU(nes) {
-            this.nes = nes;
-            // PAPU实现...
-        }
-        
-        // 模拟控制器
-        function Controller() {
-            this.state = 0;
-            // 控制器实现...
-        }
-        
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', () => {
             const container = document.getElementById('game-container');
             const gameWrapper = document.getElementById('game-wrapper');
             const sizeDisplay = document.querySelector('.size-display');
@@ -620,10 +466,11 @@
             const resetBtn = document.getElementById('reset-btn');
             const fullscreenBtn = document.getElementById('fullscreen-btn');
             const restartBtn = document.getElementById('restart-btn');
-            const tryAlternativeBtn = document.getElementById('try-alternative');
-            const canvas = document.getElementById('nes-canvas');
-            const loadingElement = document.querySelector('.loading');
+            const undoBtn = document.getElementById('undo-btn');
+            const canvas = document.getElementById('chess-canvas');
+            const loadingElement = document.getElementById('loading');
             const progressBar = document.getElementById('progress-bar');
+            const currentPlayerElement = document.getElementById('current-player');
             
             // 初始尺寸设置
             let scale = 1;
@@ -631,14 +478,47 @@
             const minScale = 0.6;
             const scaleStep = 0.1;
             
+            // 游戏状态
+            let selectedPiece = null;
+            let currentPlayer = 'red'; // 'red' or 'black'
+            let moveHistory = [];
+            
+            // 棋子布局
+            const initialBoard = [
+                // 黑方（上方）
+                [{type: 'chariot', color: 'black'}, null, null, {type: 'soldier', color: 'black'}, null, null, {type: 'soldier', color: 'black'}, null, null, {type: 'chariot', color: 'black'}],
+                [null, {type: 'cannon', color: 'black'}, null, null, null, null, null, null, {type: 'cannon', color: 'black'}, null],
+                [{type: 'horse', color: 'black'}, null, {type: 'elephant', color: 'black'}, null, null, null, null, {type: 'elephant', color: 'black'}, null, {type: 'horse', color: 'black'}],
+                [null, null, null, null, null, null, null, null, null, null],
+                [null, null, {type: 'advisor', color: 'black'}, null, null, null, null, null, {type: 'advisor', color: 'black'}, null],
+                
+                // 中间河界
+                [null, null, null, null, null, null, null, null, null, null],
+                
+                // 红方（下方）
+                [null, null, {type: 'advisor', color: 'red'}, null, null, null, null, null, {type: 'advisor', color: 'red'}, null],
+                [null, null, null, null, null, null, null, null, null, null],
+                [{type: 'horse', color: 'red'}, null, {type: 'elephant', color: 'red'}, null, null, null, null, {type: 'elephant', color: 'red'}, null, {type: 'horse', color: 'red'}],
+                [null, {type: 'cannon', color: 'red'}, null, null, null, null, null, null, {type: 'cannon', color: 'red'}, null],
+                [{type: 'chariot', color: 'red'}, null, null, {type: 'soldier', color: 'red'}, null, null, {type: 'soldier', color: 'red'}, null, null, {type: 'chariot', color: 'red'}]
+            ];
+            
+            // 将/帅的位置
+            const generalPositions = {
+                black: {row: 0, col: 4},
+                red: {row: 10, col: 4}
+            };
+            
+            let board = JSON.parse(JSON.stringify(initialBoard));
+            
             // 更新尺寸显示
             function updateSizeDisplay() {
-                sizeDisplay.textContent = Math.round(scale * 100) + '%';
-                gameWrapper.style.maxWidth = (1000 * scale) + 'px';
+                sizeDisplay.textContent = `${Math.round(scale * 100)}%`;
+                gameWrapper.style.maxWidth = `${1000 * scale}px`;
             }
             
             // 缩小游戏
-            sizeDownBtn.addEventListener('click', function() {
+            sizeDownBtn.addEventListener('click', () => {
                 if (scale > minScale) {
                     scale -= scaleStep;
                     updateSizeDisplay();
@@ -646,7 +526,7 @@
             });
             
             // 放大游戏
-            sizeUpBtn.addEventListener('click', function() {
+            sizeUpBtn.addEventListener('click', () => {
                 if (scale < maxScale) {
                     scale += scaleStep;
                     updateSizeDisplay();
@@ -654,7 +534,7 @@
             });
             
             // 重置尺寸
-            resetBtn.addEventListener('click', function() {
+            resetBtn.addEventListener('click', () => {
                 scale = 1;
                 updateSizeDisplay();
                 if (container.classList.contains('fullscreen')) {
@@ -663,10 +543,11 @@
             });
             
             // 全屏功能
-            fullscreenBtn.addEventListener('click', function() {
+            fullscreenBtn.addEventListener('click', () => {
                 if (!container.classList.contains('fullscreen')) {
                     container.classList.add('fullscreen');
                     fullscreenBtn.textContent = '退出全屏';
+                    resizeCanvas();
                 } else {
                     exitFullscreen();
                 }
@@ -676,6 +557,7 @@
             function exitFullscreen() {
                 container.classList.remove('fullscreen');
                 fullscreenBtn.textContent = '全屏模式';
+                resizeCanvas();
             }
             
             // 初始化显示
@@ -683,14 +565,14 @@
             
             // 更新加载进度
             function updateProgress(step, percent) {
-                var stepElement = document.getElementById('step-' + step);
-                var prevSteps = document.querySelectorAll('[id^="step-"]');
+                const stepElement = document.getElementById(`step-${step}`);
+                const prevSteps = document.querySelectorAll(`[id^="step-"]`);
                 
                 // 更新进度条
-                progressBar.style.width = percent + '%';
+                progressBar.style.width = `${percent}%`;
                 
                 // 更新步骤状态
-                prevSteps.forEach(function(s, i) {
+                prevSteps.forEach((s, i) => {
                     if (i + 1 < step) {
                         s.classList.remove('step-active', 'step-pending');
                         s.classList.add('step-complete');
@@ -707,103 +589,259 @@
                 });
             }
             
-            // 加载NES游戏
-            function loadNESGame() {
+            // 初始化游戏
+            function initGame() {
                 updateProgress(1, 25);
                 
-                // 模拟器核心已内联，直接进入下一步
-                setTimeout(function() {
+                setTimeout(() => {
                     updateProgress(2, 50);
-                    loadROM();
-                }, 1000);
-            }
-            
-            function loadROM() {
-                updateProgress(3, 75);
-                
-                // 尝试从服务器获取ROM
-                fetch('chinese-chess.nes')
-                    .then(function(response) {
-                        if (!response.ok) {
-                            throw new Error('ROM文件未找到');
-                        }
-                        return response.arrayBuffer();
-                    })
-                    .then(function(buffer) {
-                        setTimeout(function() {
-                            initializeEmulator(new Uint8Array(buffer));
-                        }, 1500);
-                    })
-                    .catch(function(e) {
-                        showError("无法加载游戏ROM: " + e.message);
-                    });
-            }
-            
-            function initializeEmulator(romData) {
-                updateProgress(4, 90);
-                
-                try {
-                    // 初始化模拟器
-                    var nes = new JSNES({
-                        onFrame: function(frameData) {
-                            // 每帧渲染
-                            // 在实际实现中，这里会处理真实的帧数据
-                        },
-                        onAudioSample: function(sample) {
-                            // 音频处理
-                        }
-                    });
+                    resizeCanvas();
                     
-                    // 加载ROM
-                    nes.loadROM(romData);
-                    
-                    // 显示Canvas
-                    canvas.style.display = 'block';
-                    canvas.width = 600;
-                    canvas.height = 450;
-                    
-                    // 模拟器初始化成功
-                    setTimeout(function() {
-                        loadingElement.innerHTML = '<div style="text-align: center; color: #aaffaa;"><h2>✅ 游戏加载成功!</h2><p>即将启动游戏...</p></div>';
+                    setTimeout(() => {
+                        updateProgress(3, 75);
+                        drawBoard();
                         
-                        // 在实际实现中，这里会启动游戏
-                        setTimeout(function() {
-                            loadingElement.style.display = 'none';
-                            nes.start();
-                        }, 2000);
-                    }, 1000);
-                } catch (e) {
-                    showError("模拟器初始化失败: " + e.message);
+                        setTimeout(() => {
+                            updateProgress(4, 100);
+                            
+                            setTimeout(() => {
+                                loadingElement.style.display = 'none';
+                                setupEventListeners();
+                            }, 500);
+                        }, 500);
+                    }, 500);
+                }, 500);
+            }
+            
+            // 调整画布大小
+            function resizeCanvas() {
+                const containerWidth = container.clientWidth;
+                const containerHeight = container.clientHeight;
+                
+                canvas.width = containerWidth;
+                canvas.height = containerHeight;
+                
+                drawBoard();
+            }
+            
+            // 绘制棋盘
+            function drawBoard() {
+                const ctx = canvas.getContext('2d');
+                const width = canvas.width;
+                const height = canvas.height;
+                
+                // 清除画布
+                ctx.clearRect(0, 0, width, height);
+                
+                // 绘制背景
+                ctx.fillStyle = '#d9a466';
+                ctx.fillRect(0, 0, width, height);
+                
+                // 计算棋盘格大小
+                const cellWidth = width / 10;
+                const cellHeight = height / 11;
+                
+                // 绘制棋盘网格
+                ctx.strokeStyle = '#000000';
+                ctx.lineWidth = 2;
+                
+                // 绘制横线
+                for (let i = 0; i < 10; i++) {
+                    ctx.beginPath();
+                    ctx.moveTo(cellWidth, cellHeight + i * cellHeight);
+                    ctx.lineTo(width - cellWidth, cellHeight + i * cellHeight);
+                    ctx.stroke();
+                }
+                
+                // 绘制竖线
+                for (let i = 0; i < 9; i++) {
+                    // 上半部分
+                    ctx.beginPath();
+                    ctx.moveTo(cellWidth + i * cellWidth, cellHeight);
+                    ctx.lineTo(cellWidth + i * cellWidth, cellHeight + 4 * cellHeight);
+                    ctx.stroke();
+                    
+                    // 下半部分
+                    ctx.beginPath();
+                    ctx.moveTo(cellWidth + i * cellWidth, cellHeight + 5 * cellHeight);
+                    ctx.lineTo(cellWidth + i * cellWidth, cellHeight + 9 * cellHeight);
+                    ctx.stroke();
+                }
+                
+                // 绘制九宫格
+                ctx.beginPath();
+                // 上方九宫格
+                ctx.moveTo(3 * cellWidth, cellHeight);
+                ctx.lineTo(5 * cellWidth, 3 * cellHeight);
+                ctx.moveTo(5 * cellWidth, cellHeight);
+                ctx.lineTo(3 * cellWidth, 3 * cellHeight);
+                
+                // 下方九宫格
+                ctx.moveTo(3 * cellWidth, cellHeight + 8 * cellHeight);
+                ctx.lineTo(5 * cellWidth, cellHeight + 6 * cellHeight);
+                ctx.moveTo(5 * cellWidth, cellHeight + 8 * cellHeight);
+                ctx.lineTo(3 * cellWidth, cellHeight + 6 * cellHeight);
+                ctx.stroke();
+                
+                // 绘制楚河汉界
+                ctx.font = `${cellHeight * 0.4}px Microsoft YaHei`;
+                ctx.fillStyle = '#000000';
+                ctx.textAlign = 'center';
+                ctx.fillText('楚 河', width / 2, cellHeight + 4.7 * cellHeight);
+                ctx.fillText('汉 界', width / 2, cellHeight + 5.3 * cellHeight);
+                
+                // 绘制棋子
+                for (let row = 0; row < 11; row++) {
+                    for (let col = 0; col < 10; col++) {
+                        const piece = board[row][col];
+                        if (piece) {
+                            drawPiece(ctx, col, row, piece.type, piece.color, col === selectedPiece?.col && row === selectedPiece?.row);
+                        }
+                    }
                 }
             }
             
-            // 显示错误信息
-            function showError(message) {
-                loadingElement.innerHTML = '<div style="color: #ff6b6b; text-align: center;"><h2>❌ 加载失败</h2><p>' + message + '</p><p>请确保您有合法的游戏ROM文件并命名为"chinese-chess.nes"</p><button onclick="window.location.reload()" style="margin-top:20px; padding:10px 20px; background:#8b4513; border:2px solid #d9a466; border-radius:5px; color:#ffd700; cursor:pointer;">重新加载</button></div>';
+            // 绘制棋子
+            function drawPiece(ctx, col, row, type, color, isSelected = false) {
+                const cellWidth = canvas.width / 10;
+                const cellHeight = canvas.height / 11;
+                
+                const x = col * cellWidth + cellWidth / 2;
+                const y = row * cellHeight + cellHeight / 2;
+                const radius = Math.min(cellWidth, cellHeight) * 0.4;
+                
+                // 绘制棋子圆形
+                ctx.beginPath();
+                ctx.arc(x, y, radius, 0, Math.PI * 2);
+                
+                // 棋子颜色
+                if (color === 'red') {
+                    ctx.fillStyle = '#ff4136';
+                } else {
+                    ctx.fillStyle = '#000000';
+                }
+                
+                ctx.fill();
+                
+                // 绘制边框
+                ctx.strokeStyle = isSelected ? '#ffd700' : '#ffffff';
+                ctx.lineWidth = isSelected ? 4 : 2;
+                ctx.stroke();
+                
+                // 绘制棋子文字
+                ctx.fillStyle = color === 'red' ? '#ffffff' : '#ffffff';
+                ctx.font = `${radius}px Microsoft YaHei`;
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+                
+                let text = '';
+                switch(type) {
+                    case 'general': text = color === 'red' ? '帅' : '将'; break;
+                    case 'advisor': text = color === 'red' ? '仕' : '士'; break;
+                    case 'elephant': text = color === 'red' ? '相' : '象'; break;
+                    case 'horse': text = '马'; break;
+                    case 'chariot': text = '车'; break;
+                    case 'cannon': text = '炮'; break;
+                    case 'soldier': text = color === 'red' ? '兵' : '卒'; break;
+                }
+                
+                ctx.fillText(text, x, y);
             }
             
-            // 尝试备用方案
-            tryAlternativeBtn.addEventListener('click', function() {
-                loadingElement.innerHTML = '<div style="text-align: center;"><h3>备用方案</h3><p>由于NES游戏需要特定ROM文件，您可以选择：</p><div style="margin-top: 20px;"><p>1. 确保"chinese-chess.nes"文件与网页在同一目录</p><p>2. 或使用在线NES模拟器网站</p><p>3. 或下载专用NES模拟器软件</p></div><button onclick="window.location.reload()" style="margin-top:20px; padding:10px 20px; background:#8b4513; border:2px solid #d9a466; border-radius:5px; color:#ffd700; cursor:pointer;">返回</button></div>';
-            });
+            // 设置事件监听器
+            function setupEventListeners() {
+                canvas.addEventListener('click', handleCanvasClick);
+                window.addEventListener('resize', resizeCanvas);
+            }
+            
+            // 处理画布点击事件
+            function handleCanvasClick(event) {
+                const rect = canvas.getBoundingClientRect();
+                const x = event.clientX - rect.left;
+                const y = event.clientY - rect.top;
+                
+                const col = Math.floor(x / (canvas.width / 10));
+                const row = Math.floor(y / (canvas.height / 11));
+                
+                if (row < 0 || row >= 11 || col < 0 || col >= 10) return;
+                
+                const clickedPiece = board[row][col];
+                
+                // 如果已经选择了棋子
+                if (selectedPiece) {
+                    // 如果点击的是自己的另一个棋子，则选择新棋子
+                    if (clickedPiece && clickedPiece.color === currentPlayer) {
+                        selectedPiece = {row, col};
+                    } 
+                    // 如果点击的是空位或敌方棋子，尝试移动
+                    else {
+                        // 这里简化移动逻辑，实际应该检查移动是否合法
+                        moveHistory.push({
+                            from: {...selectedPiece},
+                            to: {row, col},
+                            piece: JSON.parse(JSON.stringify(board[selectedPiece.row][selectedPiece.col])),
+                            captured: clickedPiece ? JSON.parse(JSON.stringify(clickedPiece)) : null
+                        });
+                        
+                        // 移动棋子
+                        board[row][col] = board[selectedPiece.row][selectedPiece.col];
+                        board[selectedPiece.row][selectedPiece.col] = null;
+                        
+                        // 切换玩家
+                        currentPlayer = currentPlayer === 'red' ? 'black' : 'red';
+                        currentPlayerElement.textContent = currentPlayer === 'red' ? '红方' : '黑方';
+                        
+                        selectedPiece = null;
+                    }
+                } 
+                // 如果没有选择棋子，且点击的是当前玩家的棋子
+                else if (clickedPiece && clickedPiece.color === currentPlayer) {
+                    selectedPiece = {row, col};
+                }
+                
+                drawBoard();
+            }
             
             // 重新开始游戏
-            restartBtn.addEventListener('click', function() {
-                if (confirm('确定要重新加载游戏吗？')) {
-                    window.location.reload();
+            restartBtn.addEventListener('click', () => {
+                if (confirm('确定要重新开始游戏吗？')) {
+                    board = JSON.parse(JSON.stringify(initialBoard));
+                    selectedPiece = null;
+                    currentPlayer = 'red';
+                    currentPlayerElement.textContent = '红方';
+                    moveHistory = [];
+                    drawBoard();
+                }
+            });
+            
+            // 悔棋功能
+            undoBtn.addEventListener('click', () => {
+                if (moveHistory.length > 0) {
+                    const lastMove = moveHistory.pop();
+                    
+                    // 恢复棋子到原来的位置
+                    board[lastMove.from.row][lastMove.from.col] = lastMove.piece;
+                    board[lastMove.to.row][lastMove.to.col] = lastMove.captured;
+                    
+                    // 切换回上一个玩家
+                    currentPlayer = currentPlayer === 'red' ? 'black' : 'red';
+                    currentPlayerElement.textContent = currentPlayer === 'red' ? '红方' : '黑方';
+                    
+                    selectedPiece = null;
+                    drawBoard();
                 }
             });
             
             // 键盘控制
-            document.addEventListener('keydown', function(e) {
+            document.addEventListener('keydown', (e) => {
                 if (e.key === 'Escape' && container.classList.contains('fullscreen')) {
                     exitFullscreen();
                 }
             });
             
             // 开始加载游戏
-            setTimeout(function() {
-                loadNESGame();
+            setTimeout(() => {
+                initGame();
             }, 1000);
         });
     </script>
